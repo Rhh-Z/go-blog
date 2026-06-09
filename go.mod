@@ -1,4 +1,4 @@
-module helloworld
+module kratos-realworld
 
 go 1.21
 

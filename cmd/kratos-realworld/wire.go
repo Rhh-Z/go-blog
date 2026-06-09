@@ -6,11 +6,11 @@
 package main
 
 import (
-	"helloworld/internal/biz"
-	"helloworld/internal/conf"
-	"helloworld/internal/data"
-	"helloworld/internal/server"
-	"helloworld/internal/service"
+	"kratos-realworld/internal/biz"
+	"kratos-realworld/internal/conf"
+	"kratos-realworld/internal/data"
+	"kratos-realworld/internal/server"
+	"kratos-realworld/internal/service"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
