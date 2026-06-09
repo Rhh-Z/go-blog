@@ -82,7 +82,7 @@ type RealWorldHTTPServer interface {
 
 func RegisterRealWorldHTTPServer(s *http.Server, srv RealWorldHTTPServer) {
 	r := s.Route("/")
-	r.POST("/api/user/login", _RealWorld_Login0_HTTP_Handler(srv))
+	r.POST("/api/users/login", _RealWorld_Login0_HTTP_Handler(srv))
 	r.POST("/api/users", _RealWorld_Register0_HTTP_Handler(srv))
 	r.GET("/api/users", _RealWorld_GetUser0_HTTP_Handler(srv))
 	r.PUT("/api/users", _RealWorld_UpdateUser0_HTTP_Handler(srv))
@@ -755,7 +755,7 @@ func (c *RealWorldHTTPClientImpl) ListArticles(ctx context.Context, in *ListArti
 // Login 登录
 func (c *RealWorldHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*LoginResponse, error) {
 	var out LoginResponse
-	pattern := "/api/user/login"
+	pattern := "/api/users/login"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRealWorldLogin))
 	opts = append(opts, http.PathTemplate(pattern))

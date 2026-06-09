@@ -820,6 +820,7 @@ func (x *LoginRequest) GetUser() *LoginRequest_User {
 
 type LoginResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	User          *LoginResponse_User    `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -852,6 +853,13 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
 func (*LoginResponse) Descriptor() ([]byte, []int) {
 	return file_api_realworld_v1_realworld_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *LoginResponse) GetUser() *LoginResponse_User {
+	if x != nil {
+		return x.User
+	}
+	return nil
 }
 
 type RegisterRequest struct {
@@ -980,11 +988,7 @@ func (*UserRequest) Descriptor() ([]byte, []int) {
 
 type UserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
-	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
-	Bio           string                 `protobuf:"bytes,4,opt,name=bio,proto3" json:"bio,omitempty"`
-	Image         string                 `protobuf:"bytes,5,opt,name=image,proto3" json:"image,omitempty"`
+	User          *UserResponse_User     `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1019,39 +1023,11 @@ func (*UserResponse) Descriptor() ([]byte, []int) {
 	return file_api_realworld_v1_realworld_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *UserResponse) GetEmail() string {
+func (x *UserResponse) GetUser() *UserResponse_User {
 	if x != nil {
-		return x.Email
+		return x.User
 	}
-	return ""
-}
-
-func (x *UserResponse) GetToken() string {
-	if x != nil {
-		return x.Token
-	}
-	return ""
-}
-
-func (x *UserResponse) GetUsername() string {
-	if x != nil {
-		return x.Username
-	}
-	return ""
-}
-
-func (x *UserResponse) GetBio() string {
-	if x != nil {
-		return x.Bio
-	}
-	return ""
-}
-
-func (x *UserResponse) GetImage() string {
-	if x != nil {
-		return x.Image
-	}
-	return ""
+	return nil
 }
 
 type UpdateUserRequest struct {
@@ -1782,6 +1758,82 @@ func (x *LoginRequest_User) GetPassword() string {
 	return ""
 }
 
+type LoginResponse_User struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	Bio           string                 `protobuf:"bytes,4,opt,name=bio,proto3" json:"bio,omitempty"`
+	Image         string                 `protobuf:"bytes,5,opt,name=image,proto3" json:"image,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LoginResponse_User) Reset() {
+	*x = LoginResponse_User{}
+	mi := &file_api_realworld_v1_realworld_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LoginResponse_User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LoginResponse_User) ProtoMessage() {}
+
+func (x *LoginResponse_User) ProtoReflect() protoreflect.Message {
+	mi := &file_api_realworld_v1_realworld_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LoginResponse_User.ProtoReflect.Descriptor instead.
+func (*LoginResponse_User) Descriptor() ([]byte, []int) {
+	return file_api_realworld_v1_realworld_proto_rawDescGZIP(), []int{17, 0}
+}
+
+func (x *LoginResponse_User) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *LoginResponse_User) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *LoginResponse_User) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *LoginResponse_User) GetBio() string {
+	if x != nil {
+		return x.Bio
+	}
+	return ""
+}
+
+func (x *LoginResponse_User) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
+}
+
 type RegisterRequest_User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
@@ -1793,7 +1845,7 @@ type RegisterRequest_User struct {
 
 func (x *RegisterRequest_User) Reset() {
 	*x = RegisterRequest_User{}
-	mi := &file_api_realworld_v1_realworld_proto_msgTypes[34]
+	mi := &file_api_realworld_v1_realworld_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1805,7 +1857,7 @@ func (x *RegisterRequest_User) String() string {
 func (*RegisterRequest_User) ProtoMessage() {}
 
 func (x *RegisterRequest_User) ProtoReflect() protoreflect.Message {
-	mi := &file_api_realworld_v1_realworld_proto_msgTypes[34]
+	mi := &file_api_realworld_v1_realworld_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1842,6 +1894,82 @@ func (x *RegisterRequest_User) GetPassword() string {
 	return ""
 }
 
+type UserResponse_User struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
+	Bio           string                 `protobuf:"bytes,4,opt,name=bio,proto3" json:"bio,omitempty"`
+	Image         string                 `protobuf:"bytes,5,opt,name=image,proto3" json:"image,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserResponse_User) Reset() {
+	*x = UserResponse_User{}
+	mi := &file_api_realworld_v1_realworld_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserResponse_User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserResponse_User) ProtoMessage() {}
+
+func (x *UserResponse_User) ProtoReflect() protoreflect.Message {
+	mi := &file_api_realworld_v1_realworld_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserResponse_User.ProtoReflect.Descriptor instead.
+func (*UserResponse_User) Descriptor() ([]byte, []int) {
+	return file_api_realworld_v1_realworld_proto_rawDescGZIP(), []int{21, 0}
+}
+
+func (x *UserResponse_User) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *UserResponse_User) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+func (x *UserResponse_User) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *UserResponse_User) GetBio() string {
+	if x != nil {
+		return x.Bio
+	}
+	return ""
+}
+
+func (x *UserResponse_User) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
+}
+
 type UpdateUserRequest_User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
@@ -1853,7 +1981,7 @@ type UpdateUserRequest_User struct {
 
 func (x *UpdateUserRequest_User) Reset() {
 	*x = UpdateUserRequest_User{}
-	mi := &file_api_realworld_v1_realworld_proto_msgTypes[35]
+	mi := &file_api_realworld_v1_realworld_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1865,7 +1993,7 @@ func (x *UpdateUserRequest_User) String() string {
 func (*UpdateUserRequest_User) ProtoMessage() {}
 
 func (x *UpdateUserRequest_User) ProtoReflect() protoreflect.Message {
-	mi := &file_api_realworld_v1_realworld_proto_msgTypes[35]
+	mi := &file_api_realworld_v1_realworld_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1919,7 +2047,7 @@ type MultipleArticlesResponse_Article struct {
 
 func (x *MultipleArticlesResponse_Article) Reset() {
 	*x = MultipleArticlesResponse_Article{}
-	mi := &file_api_realworld_v1_realworld_proto_msgTypes[36]
+	mi := &file_api_realworld_v1_realworld_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1931,7 +2059,7 @@ func (x *MultipleArticlesResponse_Article) String() string {
 func (*MultipleArticlesResponse_Article) ProtoMessage() {}
 
 func (x *MultipleArticlesResponse_Article) ProtoReflect() protoreflect.Message {
-	mi := &file_api_realworld_v1_realworld_proto_msgTypes[36]
+	mi := &file_api_realworld_v1_realworld_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2069,8 +2197,15 @@ const file_api_realworld_v1_realworld_proto_rawDesc = "" +
 	"\x04user\x18\x01 \x01(\v2\x1f.realworld.v1.LoginRequest.UserR\x04user\x1a8\n" +
 	"\x04User\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"\x0f\n" +
-	"\rLoginResponse\"\x9f\x01\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"\xc3\x01\n" +
+	"\rLoginResponse\x124\n" +
+	"\x04user\x18\x01 \x01(\v2 .realworld.v1.LoginResponse.UserR\x04user\x1a|\n" +
+	"\x04User\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x10\n" +
+	"\x03bio\x18\x04 \x01(\tR\x03bio\x12\x14\n" +
+	"\x05image\x18\x05 \x01(\tR\x05image\"\x9f\x01\n" +
 	"\x0fRegisterRequest\x126\n" +
 	"\x04user\x18\x01 \x01(\v2\".realworld.v1.RegisterRequest.UserR\x04user\x1aT\n" +
 	"\x04User\x12\x1a\n" +
@@ -2079,8 +2214,10 @@ const file_api_realworld_v1_realworld_proto_rawDesc = "" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\"&\n" +
 	"\x10RegisterResponse\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"\r\n" +
-	"\vUserRequest\"~\n" +
-	"\fUserResponse\x12\x14\n" +
+	"\vUserRequest\"\xbb\x01\n" +
+	"\fUserResponse\x123\n" +
+	"\x04user\x18\x01 \x01(\v2\x1f.realworld.v1.UserResponse.UserR\x04user\x1av\n" +
+	"\x04User\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12\x1a\n" +
 	"\busername\x18\x03 \x01(\tR\busername\x12\x10\n" +
@@ -2134,9 +2271,9 @@ const file_api_realworld_v1_realworld_proto_rawDesc = "" +
 	"\bcomments\x18\x01 \x03(\v2\x1d.realworld.v1.CommentResponseR\bcomments\x125\n" +
 	"\x06author\x18\x02 \x01(\v2\x1d.realworld.v1.ProfileResponseR\x06author\"%\n" +
 	"\x0fTagListResponse\x12\x12\n" +
-	"\x04Tags\x18\x01 \x03(\tR\x04Tags2\xb6\x11\n" +
-	"\tRealWorld\x12\\\n" +
-	"\x05Login\x12\x1a.realworld.v1.LoginRequest\x1a\x1b.realworld.v1.LoginResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/api/user/login\x12`\n" +
+	"\x04Tags\x18\x01 \x03(\tR\x04Tags2\xb7\x11\n" +
+	"\tRealWorld\x12]\n" +
+	"\x05Login\x12\x1a.realworld.v1.LoginRequest\x1a\x1b.realworld.v1.LoginResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/users/login\x12`\n" +
 	"\bRegister\x12\x1d.realworld.v1.RegisterRequest\x1a\x1e.realworld.v1.RegisterResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
 	"/api/users\x12T\n" +
 	"\aGetUser\x12\x19.realworld.v1.UserRequest\x1a\x1a.realworld.v1.UserResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
@@ -2175,7 +2312,7 @@ func file_api_realworld_v1_realworld_proto_rawDescGZIP() []byte {
 	return file_api_realworld_v1_realworld_proto_rawDescData
 }
 
-var file_api_realworld_v1_realworld_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
+var file_api_realworld_v1_realworld_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
 var file_api_realworld_v1_realworld_proto_goTypes = []any{
 	(*GetTagListRequest)(nil),                // 0: realworld.v1.GetTagListRequest
 	(*UnFavoriteProfileRequest)(nil),         // 1: realworld.v1.UnFavoriteProfileRequest
@@ -2211,67 +2348,71 @@ var file_api_realworld_v1_realworld_proto_goTypes = []any{
 	(*UpdateArticlesRequest_Article)(nil),    // 31: realworld.v1.UpdateArticlesRequest.Article
 	(*CreateArticleRequest_Article)(nil),     // 32: realworld.v1.CreateArticleRequest.Article
 	(*LoginRequest_User)(nil),                // 33: realworld.v1.LoginRequest.User
-	(*RegisterRequest_User)(nil),             // 34: realworld.v1.RegisterRequest.User
-	(*UpdateUserRequest_User)(nil),           // 35: realworld.v1.UpdateUserRequest.User
-	(*MultipleArticlesResponse_Article)(nil), // 36: realworld.v1.MultipleArticlesResponse.Article
+	(*LoginResponse_User)(nil),               // 34: realworld.v1.LoginResponse.User
+	(*RegisterRequest_User)(nil),             // 35: realworld.v1.RegisterRequest.User
+	(*UserResponse_User)(nil),                // 36: realworld.v1.UserResponse.User
+	(*UpdateUserRequest_User)(nil),           // 37: realworld.v1.UpdateUserRequest.User
+	(*MultipleArticlesResponse_Article)(nil), // 38: realworld.v1.MultipleArticlesResponse.Article
 }
 var file_api_realworld_v1_realworld_proto_depIdxs = []int32{
 	30, // 0: realworld.v1.AddCommentRequest.comment:type_name -> realworld.v1.AddCommentRequest.Comment
 	31, // 1: realworld.v1.UpdateArticlesRequest.article:type_name -> realworld.v1.UpdateArticlesRequest.Article
 	32, // 2: realworld.v1.CreateArticleRequest.article:type_name -> realworld.v1.CreateArticleRequest.Article
 	33, // 3: realworld.v1.LoginRequest.user:type_name -> realworld.v1.LoginRequest.User
-	34, // 4: realworld.v1.RegisterRequest.user:type_name -> realworld.v1.RegisterRequest.User
-	35, // 5: realworld.v1.UpdateUserRequest.user:type_name -> realworld.v1.UpdateUserRequest.User
-	23, // 6: realworld.v1.SingleArticleResponse.author:type_name -> realworld.v1.ProfileResponse
-	36, // 7: realworld.v1.MultipleArticlesResponse.articles:type_name -> realworld.v1.MultipleArticlesResponse.Article
-	23, // 8: realworld.v1.CommentResponse.author:type_name -> realworld.v1.ProfileResponse
-	26, // 9: realworld.v1.SingleCommentResponse.comment:type_name -> realworld.v1.CommentResponse
-	26, // 10: realworld.v1.MultipleCommentsResponse.comments:type_name -> realworld.v1.CommentResponse
-	23, // 11: realworld.v1.MultipleCommentsResponse.author:type_name -> realworld.v1.ProfileResponse
-	23, // 12: realworld.v1.MultipleArticlesResponse.Article.author:type_name -> realworld.v1.ProfileResponse
-	16, // 13: realworld.v1.RealWorld.Login:input_type -> realworld.v1.LoginRequest
-	18, // 14: realworld.v1.RealWorld.Register:input_type -> realworld.v1.RegisterRequest
-	20, // 15: realworld.v1.RealWorld.GetUser:input_type -> realworld.v1.UserRequest
-	22, // 16: realworld.v1.RealWorld.UpdateUser:input_type -> realworld.v1.UpdateUserRequest
-	14, // 17: realworld.v1.RealWorld.GetProfile:input_type -> realworld.v1.GetProfileRequest
-	13, // 18: realworld.v1.RealWorld.FollowProfile:input_type -> realworld.v1.FollowProfileRequest
-	12, // 19: realworld.v1.RealWorld.UnfollowProfile:input_type -> realworld.v1.UnfollowProfileRequest
-	11, // 20: realworld.v1.RealWorld.ListArticles:input_type -> realworld.v1.ListArticlesRequest
-	11, // 21: realworld.v1.RealWorld.FeedArticles:input_type -> realworld.v1.ListArticlesRequest
-	9,  // 22: realworld.v1.RealWorld.GetArticles:input_type -> realworld.v1.GetArticlesRequest
-	8,  // 23: realworld.v1.RealWorld.CreateArticles:input_type -> realworld.v1.CreateArticleRequest
-	7,  // 24: realworld.v1.RealWorld.updateArticles:input_type -> realworld.v1.UpdateArticlesRequest
-	6,  // 25: realworld.v1.RealWorld.deleteArticles:input_type -> realworld.v1.DeleteArticlesRequest
-	5,  // 26: realworld.v1.RealWorld.AddComment:input_type -> realworld.v1.AddCommentRequest
-	4,  // 27: realworld.v1.RealWorld.GetComments:input_type -> realworld.v1.GetCommentsRequest
-	3,  // 28: realworld.v1.RealWorld.DeleteComment:input_type -> realworld.v1.DeleteCommentRequest
-	2,  // 29: realworld.v1.RealWorld.FavoriteArticle:input_type -> realworld.v1.FavoriteArticleRequest
-	1,  // 30: realworld.v1.RealWorld.UnFavoriteProfile:input_type -> realworld.v1.UnFavoriteProfileRequest
-	0,  // 31: realworld.v1.RealWorld.GetTagList:input_type -> realworld.v1.GetTagListRequest
-	17, // 32: realworld.v1.RealWorld.Login:output_type -> realworld.v1.LoginResponse
-	19, // 33: realworld.v1.RealWorld.Register:output_type -> realworld.v1.RegisterResponse
-	21, // 34: realworld.v1.RealWorld.GetUser:output_type -> realworld.v1.UserResponse
-	21, // 35: realworld.v1.RealWorld.UpdateUser:output_type -> realworld.v1.UserResponse
-	23, // 36: realworld.v1.RealWorld.GetProfile:output_type -> realworld.v1.ProfileResponse
-	23, // 37: realworld.v1.RealWorld.FollowProfile:output_type -> realworld.v1.ProfileResponse
-	23, // 38: realworld.v1.RealWorld.UnfollowProfile:output_type -> realworld.v1.ProfileResponse
-	25, // 39: realworld.v1.RealWorld.ListArticles:output_type -> realworld.v1.MultipleArticlesResponse
-	25, // 40: realworld.v1.RealWorld.FeedArticles:output_type -> realworld.v1.MultipleArticlesResponse
-	24, // 41: realworld.v1.RealWorld.GetArticles:output_type -> realworld.v1.SingleArticleResponse
-	24, // 42: realworld.v1.RealWorld.CreateArticles:output_type -> realworld.v1.SingleArticleResponse
-	24, // 43: realworld.v1.RealWorld.updateArticles:output_type -> realworld.v1.SingleArticleResponse
-	24, // 44: realworld.v1.RealWorld.deleteArticles:output_type -> realworld.v1.SingleArticleResponse
-	27, // 45: realworld.v1.RealWorld.AddComment:output_type -> realworld.v1.SingleCommentResponse
-	28, // 46: realworld.v1.RealWorld.GetComments:output_type -> realworld.v1.MultipleCommentsResponse
-	27, // 47: realworld.v1.RealWorld.DeleteComment:output_type -> realworld.v1.SingleCommentResponse
-	24, // 48: realworld.v1.RealWorld.FavoriteArticle:output_type -> realworld.v1.SingleArticleResponse
-	24, // 49: realworld.v1.RealWorld.UnFavoriteProfile:output_type -> realworld.v1.SingleArticleResponse
-	29, // 50: realworld.v1.RealWorld.GetTagList:output_type -> realworld.v1.TagListResponse
-	32, // [32:51] is the sub-list for method output_type
-	13, // [13:32] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	34, // 4: realworld.v1.LoginResponse.user:type_name -> realworld.v1.LoginResponse.User
+	35, // 5: realworld.v1.RegisterRequest.user:type_name -> realworld.v1.RegisterRequest.User
+	36, // 6: realworld.v1.UserResponse.user:type_name -> realworld.v1.UserResponse.User
+	37, // 7: realworld.v1.UpdateUserRequest.user:type_name -> realworld.v1.UpdateUserRequest.User
+	23, // 8: realworld.v1.SingleArticleResponse.author:type_name -> realworld.v1.ProfileResponse
+	38, // 9: realworld.v1.MultipleArticlesResponse.articles:type_name -> realworld.v1.MultipleArticlesResponse.Article
+	23, // 10: realworld.v1.CommentResponse.author:type_name -> realworld.v1.ProfileResponse
+	26, // 11: realworld.v1.SingleCommentResponse.comment:type_name -> realworld.v1.CommentResponse
+	26, // 12: realworld.v1.MultipleCommentsResponse.comments:type_name -> realworld.v1.CommentResponse
+	23, // 13: realworld.v1.MultipleCommentsResponse.author:type_name -> realworld.v1.ProfileResponse
+	23, // 14: realworld.v1.MultipleArticlesResponse.Article.author:type_name -> realworld.v1.ProfileResponse
+	16, // 15: realworld.v1.RealWorld.Login:input_type -> realworld.v1.LoginRequest
+	18, // 16: realworld.v1.RealWorld.Register:input_type -> realworld.v1.RegisterRequest
+	20, // 17: realworld.v1.RealWorld.GetUser:input_type -> realworld.v1.UserRequest
+	22, // 18: realworld.v1.RealWorld.UpdateUser:input_type -> realworld.v1.UpdateUserRequest
+	14, // 19: realworld.v1.RealWorld.GetProfile:input_type -> realworld.v1.GetProfileRequest
+	13, // 20: realworld.v1.RealWorld.FollowProfile:input_type -> realworld.v1.FollowProfileRequest
+	12, // 21: realworld.v1.RealWorld.UnfollowProfile:input_type -> realworld.v1.UnfollowProfileRequest
+	11, // 22: realworld.v1.RealWorld.ListArticles:input_type -> realworld.v1.ListArticlesRequest
+	11, // 23: realworld.v1.RealWorld.FeedArticles:input_type -> realworld.v1.ListArticlesRequest
+	9,  // 24: realworld.v1.RealWorld.GetArticles:input_type -> realworld.v1.GetArticlesRequest
+	8,  // 25: realworld.v1.RealWorld.CreateArticles:input_type -> realworld.v1.CreateArticleRequest
+	7,  // 26: realworld.v1.RealWorld.updateArticles:input_type -> realworld.v1.UpdateArticlesRequest
+	6,  // 27: realworld.v1.RealWorld.deleteArticles:input_type -> realworld.v1.DeleteArticlesRequest
+	5,  // 28: realworld.v1.RealWorld.AddComment:input_type -> realworld.v1.AddCommentRequest
+	4,  // 29: realworld.v1.RealWorld.GetComments:input_type -> realworld.v1.GetCommentsRequest
+	3,  // 30: realworld.v1.RealWorld.DeleteComment:input_type -> realworld.v1.DeleteCommentRequest
+	2,  // 31: realworld.v1.RealWorld.FavoriteArticle:input_type -> realworld.v1.FavoriteArticleRequest
+	1,  // 32: realworld.v1.RealWorld.UnFavoriteProfile:input_type -> realworld.v1.UnFavoriteProfileRequest
+	0,  // 33: realworld.v1.RealWorld.GetTagList:input_type -> realworld.v1.GetTagListRequest
+	17, // 34: realworld.v1.RealWorld.Login:output_type -> realworld.v1.LoginResponse
+	19, // 35: realworld.v1.RealWorld.Register:output_type -> realworld.v1.RegisterResponse
+	21, // 36: realworld.v1.RealWorld.GetUser:output_type -> realworld.v1.UserResponse
+	21, // 37: realworld.v1.RealWorld.UpdateUser:output_type -> realworld.v1.UserResponse
+	23, // 38: realworld.v1.RealWorld.GetProfile:output_type -> realworld.v1.ProfileResponse
+	23, // 39: realworld.v1.RealWorld.FollowProfile:output_type -> realworld.v1.ProfileResponse
+	23, // 40: realworld.v1.RealWorld.UnfollowProfile:output_type -> realworld.v1.ProfileResponse
+	25, // 41: realworld.v1.RealWorld.ListArticles:output_type -> realworld.v1.MultipleArticlesResponse
+	25, // 42: realworld.v1.RealWorld.FeedArticles:output_type -> realworld.v1.MultipleArticlesResponse
+	24, // 43: realworld.v1.RealWorld.GetArticles:output_type -> realworld.v1.SingleArticleResponse
+	24, // 44: realworld.v1.RealWorld.CreateArticles:output_type -> realworld.v1.SingleArticleResponse
+	24, // 45: realworld.v1.RealWorld.updateArticles:output_type -> realworld.v1.SingleArticleResponse
+	24, // 46: realworld.v1.RealWorld.deleteArticles:output_type -> realworld.v1.SingleArticleResponse
+	27, // 47: realworld.v1.RealWorld.AddComment:output_type -> realworld.v1.SingleCommentResponse
+	28, // 48: realworld.v1.RealWorld.GetComments:output_type -> realworld.v1.MultipleCommentsResponse
+	27, // 49: realworld.v1.RealWorld.DeleteComment:output_type -> realworld.v1.SingleCommentResponse
+	24, // 50: realworld.v1.RealWorld.FavoriteArticle:output_type -> realworld.v1.SingleArticleResponse
+	24, // 51: realworld.v1.RealWorld.UnFavoriteProfile:output_type -> realworld.v1.SingleArticleResponse
+	29, // 52: realworld.v1.RealWorld.GetTagList:output_type -> realworld.v1.TagListResponse
+	34, // [34:53] is the sub-list for method output_type
+	15, // [15:34] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_api_realworld_v1_realworld_proto_init() }
@@ -2285,7 +2426,7 @@ func file_api_realworld_v1_realworld_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_realworld_v1_realworld_proto_rawDesc), len(file_api_realworld_v1_realworld_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   37,
+			NumMessages:   39,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

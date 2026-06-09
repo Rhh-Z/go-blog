@@ -11,7 +11,7 @@ service RealWorld {
   // 登录
   rpc Login(LoginRequest) returns (LoginResponse) {
     option (google.api.http) = {
-      post: "/api/user/login",
+      post: "/api/users/login",
       body: "*",
     };
   };
@@ -230,7 +230,14 @@ message LoginRequest {
 }
 
 message LoginResponse {
-
+  message User {
+    string username = 1;
+    string email    = 2;
+    string password = 3;
+    string bio      = 4;
+    string image    = 5;
+  }
+  User user = 1;
 }
 
 message RegisterRequest {
@@ -249,11 +256,15 @@ message RegisterResponse {
 message UserRequest {}
 
 message UserResponse {
-  string email    = 1;
-  string token    = 2;
-  string username = 3;
-  string bio      = 4;
-  string image    = 5;
+  message User {
+    string email    = 1;
+    string token    = 2;
+    string username = 3;
+    string bio      = 4;
+    string image    = 5;
+  }
+
+  User user = 1;
 }
 
 message UpdateUserRequest {

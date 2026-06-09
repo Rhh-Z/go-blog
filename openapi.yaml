@@ -429,31 +429,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /api/user/login:
-        post:
-            tags:
-                - RealWorld
-            description: 登录
-            operationId: RealWorld_Login
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/LoginRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/LoginResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
     /api/users:
         get:
             tags:
@@ -515,6 +490,31 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/RegisterResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/users/login:
+        post:
+            tags:
+                - RealWorld
+            description: 登录
+            operationId: RealWorld_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/LoginResponse'
                 default:
                     description: Default error response
                     content:
@@ -598,7 +598,22 @@ components:
                     type: string
         LoginResponse:
             type: object
-            properties: {}
+            properties:
+                user:
+                    $ref: '#/components/schemas/LoginResponse_User'
+        LoginResponse_User:
+            type: object
+            properties:
+                username:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+                bio:
+                    type: string
+                image:
+                    type: string
         MultipleArticlesResponse:
             type: object
             properties:
@@ -758,6 +773,11 @@ components:
                 image:
                     type: string
         UserResponse:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/UserResponse_User'
+        UserResponse_User:
             type: object
             properties:
                 email:
