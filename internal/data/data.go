@@ -19,13 +19,13 @@ type Data struct {
 }
 
 // 连接数据库
-func NewMongoDB() (client *qmgo.Client, data *Data) {
+func NewMongoDB() *qmgo.Database {
 	ctx := context.Background()
 	client, err := qmgo.NewClient(ctx, &qmgo.Config{Uri: "mongodb://localhost:27017"})
-	client.Database("kratos-realworld")
+	databse := client.Database("kratos-realworld")
 	if err != nil {
 		fmt.Printf("数据库客户端连接失败!\n")
-		return
+		return databse
 	}
 
 	// 关闭连接
@@ -34,7 +34,7 @@ func NewMongoDB() (client *qmgo.Client, data *Data) {
 			panic(err)
 		}
 	}()
-	return
+	return databse
 }
 
 // NewData .
