@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package api.realworld.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "kratos-realworld/api/realworld/v1;v1";
+
+service Comment {
+	// 添加评论
+  rpc CreateComment (CreateCommentRequest) returns (CreateCommentReply){
+    option (google.api.http) = {
+      post: "/api/articles/{slug}/comments",
+      body: "*"
+    } ;
+  };
+  rpc UpdateComment (UpdateCommentRequest) returns (UpdateCommentReply);
+	// 删除评论
+  rpc DeleteComment (DeleteCommentRequest) returns (DeleteCommentReply) {
+    option (google.api.http) = {
+      delete: "/api/articles/{slug}/comments/{id}",
+    } ;
+  };
+  rpc GetComment (GetCommentRequest) returns (GetCommentReply) {
+    option (google.api.http) = {
+      get: "/api/articles/{slug}/comments",
+    } ;
+  };
+  rpc ListComment (ListCommentRequest) returns (ListCommentReply);
+}
+
+message CreateCommentRequest {
+  message Comment {
+    string body = 1;
+  }
+  Comment comment = 1;
+  string  slug    = 2;
+}
+
+message CreateCommentReply {
+  message ProfileResponse {
+    string username  = 1;
+    string bio       = 2;
+    string image     = 3;
+    bool   following = 4;
+  }
+
+  message CommentResponse {
+    uint64          id        = 1;
+    string          createdAt = 2;
+    string          updatedAt = 3;
+    string          body      = 4;
+    ProfileResponse author    = 5;
+  }
+
+  CommentResponse comment = 1;
+}
+
+message UpdateCommentRequest {}
+
+message UpdateCommentReply {}
+
+message DeleteCommentRequest {
+  string slug = 1;
+  int64  id   = 2;
+}
+
+message DeleteCommentReply {
+  message ProfileResponse {
+    string username  = 1;
+    string bio       = 2;
+    string image     = 3;
+    bool   following = 4;
+  }
+
+  message CommentResponse {
+    uint64          id        = 1;
+    string          createdAt = 2;
+    string          updatedAt = 3;
+    string          body      = 4;
+    ProfileResponse author    = 5;
+  }
+
+  CommentResponse comment = 1;
+}
+
+message GetCommentRequest {
+  string slug = 1;
+}
+
+message GetCommentReply {
+  message ProfileResponse {
+    string username  = 1;
+    string bio       = 2;
+    string image     = 3;
+    bool   following = 4;
+  }
+
+  message CommentResponse {
+    uint64          id        = 1;
+    string          createdAt = 2;
+    string          updatedAt = 3;
+    string          body      = 4;
+    ProfileResponse author    = 5;
+  }
+
+  repeated CommentResponse comments = 1;
+  ProfileResponse          author   = 2;
+}
+
+message ListCommentRequest {}
+
+message ListCommentReply {}

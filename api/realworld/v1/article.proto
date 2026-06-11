@@ -1,0 +1,161 @@
+syntax = "proto3";
+
+package api.realworld.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "kratos-realworld/api/realworld/v1;v1";
+
+service Article {
+  rpc CreateArticle (CreateArticleRequest) returns (SingleArticleReply) {
+    option (google.api.http) = {
+      post: "/api/articles",
+      body: "*"
+    };
+  };
+  rpc UpdateArticle (UpdateArticleRequest) returns (SingleArticleReply) {
+    option (google.api.http) = {
+      put : "/api/articles/{slug}",
+      body: "*"
+    };
+  };
+  rpc DeleteArticle (DeleteArticleRequest) returns (SingleArticleReply) {
+    option (google.api.http) = {
+      delete: "/api/articles/{slug}",
+    } ;
+  };
+  rpc GetArticles (GetArticlesRequest) returns (GetArticlesReply) {
+    option (google.api.http) = {
+      get: "/api/articles/{slug}",
+    };
+  };
+	// 获取文章列表
+  rpc ListArticle (ListArticleRequest) returns (MultipleArticlesReply) {
+    option (google.api.http) = {
+      get: "/api/articles",
+    };
+  };
+	  // feed文章列表
+  rpc FeedArticles(FeedArticleRequest) returns (MultipleArticlesReply) {
+    option (google.api.http) = {
+      get: "/api/articles/feed",
+    };
+  };
+	  // 点赞文章
+  rpc FavoriteArticle(FavoriteArticleRequest) returns (SingleArticleReply){
+    option (google.api.http) = {
+      post: "/api/articles/{slug}/favorite",
+      body: "*"
+    } ;
+  };
+  // 取消点赞
+  rpc UnfavoriteArticle(UnfavoriteArticleRequest) returns (SingleArticleReply){
+    option (google.api.http) = {
+      delete: "/api/articles/{slug}/favorite",
+    } ;
+  };
+}
+
+message ProfileReply {
+  string username  = 1;
+  string bio       = 2;
+  string image     = 3;
+  bool   following = 4;
+}
+
+message MultipleArticlesReply {
+
+  message Article {
+    string          slug           = 1;
+    string          title          = 2;
+    string          description    = 3;
+    repeated string tagList        = 4;
+    string          createdAt      = 5;
+    string          updatedAt      = 6;
+    bool            favorited      = 7;
+    uint64          favoritesCount = 8;
+    ProfileReply    author         = 9;
+  }
+
+  repeated Article articles      = 1;
+  uint64           articlesCount = 2;
+}
+
+message CreateArticleRequest {
+  message Article {
+    string          title       = 1;
+    string          description = 2;
+    string          body        = 3;
+    repeated string tagList     = 4;
+  }
+
+  Article article = 1;
+}
+
+message SingleArticleReply {
+  string          slug           = 1;
+  string          title          = 2;
+  string          description    = 3;
+  string          body           = 4;
+  repeated string tagList        = 5;
+  string          createdAt      = 6;
+  string          updatedAt      = 7;
+  string          favorited      = 8;
+  uint64          favoritesCount = 9;
+  ProfileReply    author         = 10;
+}
+
+message CreateArticleReply {}
+
+message UpdateArticleRequest {
+  message Article {
+    string          title       = 1;
+    string          description = 2;
+    string          body        = 3;
+    repeated string tagList     = 4;
+  };
+
+  Article article = 1;
+  string  slug    = 2;
+}
+
+message UpdateArticleReply {}
+
+message DeleteArticleRequest {
+  string slug = 1;
+}
+
+message DeleteArticleReply {}
+
+message GetArticlesRequest {
+  string slug = 1;
+}
+
+message GetArticlesReply {}
+
+message ListArticleRequest {
+  string tag       = 1;
+  string author    = 2;
+  string favorited = 3;
+  uint64 limit     = 4;
+  uint64 offset    = 5;
+}
+
+message ListArticleReply {}
+
+message FeedArticleRequest {
+  int64 limit  = 1;
+  int64 offset = 2;
+}
+
+message FeedArticleReply {
+
+}
+
+message FavoriteArticleRequest {
+  string slug = 1;
+}
+
+message UnfavoriteArticleRequest {
+  string slug     = 2;
+}

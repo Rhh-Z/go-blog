@@ -13,6 +13,6 @@ type RealWorldService struct {
 }
 
 // NewRealWorld new a realworld service.
-func NewRealWorld(uc *biz.RealWorldUsecase) *RealWorldService {
+func NewRealWorldService(uc *biz.RealWorldUsecase) *RealWorldService {
 	return &RealWorldService{uc: uc}
 }

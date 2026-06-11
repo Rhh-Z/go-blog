@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package api.realworld.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "kratos-realworld/api/realworld/v1;v1";
+
+service Tag {
+  rpc CreateTag (CreateTagRequest) returns (CreateTagReply);
+  rpc UpdateTag (UpdateTagRequest) returns (UpdateTagReply);
+  rpc DeleteTag (DeleteTagRequest) returns (DeleteTagReply);
+  rpc GetTag (GetTagRequest) returns (GetTagReply);
+  rpc ListTag (ListTagRequest) returns (ListTagReply) {
+    option (google.api.http) = {
+      get: "/api/tags",
+    } ;
+  };
+}
+
+message CreateTagRequest {}
+
+message CreateTagReply {}
+
+message UpdateTagRequest {}
+
+message UpdateTagReply {}
+
+message DeleteTagRequest {}
+
+message DeleteTagReply {}
+
+message GetTagRequest {}
+
+message GetTagReply {}
+
+message ListTagRequest {}
+
+message ListTagReply {
+	repeated string Tags = 1;
+}

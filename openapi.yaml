@@ -3,16 +3,15 @@
 
 openapi: 3.0.3
 info:
-    title: RealWorld API
-    description: RealWorld
+    title: ""
     version: 0.0.1
 paths:
     /api/articles:
         get:
             tags:
-                - RealWorld
+                - Article
             description: 获取文章列表
-            operationId: RealWorld_ListArticles
+            operationId: Article_ListArticle
             parameters:
                 - name: tag
                   in: query
@@ -40,23 +39,16 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/MultipleArticlesResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.MultipleArticlesReply'
         post:
             tags:
-                - RealWorld
-            description: 创建文章列表
-            operationId: RealWorld_CreateArticles
+                - Article
+            operationId: Article_CreateArticle
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/CreateArticleRequest'
+                            $ref: '#/components/schemas/api.realworld.v1.CreateArticleRequest'
                 required: true
             responses:
                 "200":
@@ -64,32 +56,14 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/SingleArticleResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.SingleArticleReply'
     /api/articles/feed:
         get:
             tags:
-                - RealWorld
+                - Article
             description: feed文章列表
-            operationId: RealWorld_FeedArticles
+            operationId: Article_FeedArticles
             parameters:
-                - name: tag
-                  in: query
-                  schema:
-                    type: string
-                - name: author
-                  in: query
-                  schema:
-                    type: string
-                - name: favorited
-                  in: query
-                  schema:
-                    type: string
                 - name: limit
                   in: query
                   schema:
@@ -104,19 +78,12 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/MultipleArticlesResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.MultipleArticlesReply'
     /api/articles/{slug}:
         get:
             tags:
-                - RealWorld
-            description: 获取文章
-            operationId: RealWorld_GetArticles
+                - Article
+            operationId: Article_GetArticles
             parameters:
                 - name: slug
                   in: path
@@ -129,18 +96,11 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/SingleArticleResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.GetArticlesReply'
         put:
             tags:
-                - RealWorld
-            description: 更新文章列表
-            operationId: RealWorld_UpdateArticles
+                - Article
+            operationId: Article_UpdateArticle
             parameters:
                 - name: slug
                   in: path
@@ -151,7 +111,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/UpdateArticlesRequest'
+                            $ref: '#/components/schemas/api.realworld.v1.UpdateArticleRequest'
                 required: true
             responses:
                 "200":
@@ -159,18 +119,11 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/SingleArticleResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.SingleArticleReply'
         delete:
             tags:
-                - RealWorld
-            description: 删除文章列表
-            operationId: RealWorld_DeleteArticles
+                - Article
+            operationId: Article_DeleteArticle
             parameters:
                 - name: slug
                   in: path
@@ -183,19 +136,12 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/SingleArticleResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.SingleArticleReply'
     /api/articles/{slug}/comments:
         get:
             tags:
-                - RealWorld
-            description: 添加评论
-            operationId: RealWorld_GetComments
+                - Comment
+            operationId: Comment_GetComment
             parameters:
                 - name: slug
                   in: path
@@ -208,18 +154,12 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/MultipleCommentsResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.GetCommentReply'
         post:
             tags:
-                - RealWorld
+                - Comment
             description: 添加评论
-            operationId: RealWorld_AddComment
+            operationId: Comment_CreateComment
             parameters:
                 - name: slug
                   in: path
@@ -230,7 +170,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/AddCommentRequest'
+                            $ref: '#/components/schemas/api.realworld.v1.CreateCommentRequest'
                 required: true
             responses:
                 "200":
@@ -238,19 +178,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/SingleCommentResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.CreateCommentReply'
     /api/articles/{slug}/comments/{id}:
         delete:
             tags:
-                - RealWorld
+                - Comment
             description: 删除评论
-            operationId: RealWorld_DeleteComment
+            operationId: Comment_DeleteComment
             parameters:
                 - name: slug
                   in: path
@@ -268,19 +202,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/SingleCommentResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.DeleteCommentReply'
     /api/articles/{slug}/favorite:
         post:
             tags:
-                - RealWorld
+                - Article
             description: 点赞文章
-            operationId: RealWorld_FavoriteArticle
+            operationId: Article_FavoriteArticle
             parameters:
                 - name: slug
                   in: path
@@ -291,7 +219,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/FavoriteArticleRequest'
+                            $ref: '#/components/schemas/api.realworld.v1.FavoriteArticleRequest'
                 required: true
             responses:
                 "200":
@@ -299,18 +227,12 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/SingleArticleResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.SingleArticleReply'
         delete:
             tags:
-                - RealWorld
+                - Article
             description: 取消点赞
-            operationId: RealWorld_UnFavoriteProfile
+            operationId: Article_UnfavoriteArticle
             parameters:
                 - name: slug
                   in: path
@@ -323,19 +245,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/SingleArticleResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.SingleArticleReply'
     /api/profiles/{username}:
         get:
             tags:
-                - RealWorld
+                - Profile
             description: 获取用户信息
-            operationId: RealWorld_GetProfile
+            operationId: Profile_GetProfile
             parameters:
                 - name: username
                   in: path
@@ -348,19 +264,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ProfileResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.GetProfileReply'
     /api/profiles/{username}/follow:
         post:
             tags:
-                - RealWorld
+                - Profile
             description: 关注用户
-            operationId: RealWorld_FollowProfile
+            operationId: Profile_FollowProfile
             parameters:
                 - name: username
                   in: path
@@ -371,7 +281,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/FollowProfileRequest'
+                            $ref: '#/components/schemas/api.realworld.v1.FollowProfileRequest'
                 required: true
             responses:
                 "200":
@@ -379,18 +289,12 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ProfileResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.ProfileResponse'
         delete:
             tags:
-                - RealWorld
+                - Profile
             description: 取消关注
-            operationId: RealWorld_UnfollowProfile
+            operationId: Profile_UnfollowProfile
             parameters:
                 - name: username
                   in: path
@@ -403,61 +307,43 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ProfileResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.ProfileResponse'
     /api/tags:
         get:
             tags:
-                - RealWorld
-            description: 获取Tags
-            operationId: RealWorld_GetTagList
+                - Tag
+            operationId: Tag_ListTag
             responses:
                 "200":
                     description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/TagListResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /api/users:
+                                $ref: '#/components/schemas/api.realworld.v1.ListTagReply'
+    /api/user:
         get:
             tags:
-                - RealWorld
+                - User
             description: 获取用户
-            operationId: RealWorld_GetUser
+            operationId: User_GetUser
             responses:
                 "200":
                     description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/UserResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.GetUserReply'
+    /api/users:
         put:
             tags:
-                - RealWorld
+                - User
             description: 更新用户
-            operationId: RealWorld_UpdateUser
+            operationId: User_UpdateUser
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/UpdateUserRequest'
+                            $ref: '#/components/schemas/api.realworld.v1.UpdateUserRequest'
                 required: true
             responses:
                 "200":
@@ -465,13 +351,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/UserResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/api.realworld.v1.UpdateUserReply'
         post:
             tags:
                 - RealWorld
@@ -481,7 +361,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/RegisterRequest'
+                            $ref: '#/components/schemas/realworld.v1.RegisterRequest'
                 required: true
             responses:
                 "200":
@@ -489,13 +369,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/RegisterResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/realworld.v1.RegisterResponse'
     /api/users/login:
         post:
             tags:
@@ -506,7 +380,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/LoginRequest'
+                            $ref: '#/components/schemas/realworld.v1.LoginRequest'
                 required: true
             responses:
                 "200":
@@ -514,28 +388,33 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/LoginResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                                $ref: '#/components/schemas/realworld.v1.LoginResponse'
 components:
     schemas:
-        AddCommentRequest:
+        api.realworld.v1.CreateArticleRequest:
+            type: object
+            properties:
+                article:
+                    $ref: '#/components/schemas/api.realworld.v1.CreateArticleRequest_Article'
+        api.realworld.v1.CreateArticleRequest_Article:
+            type: object
+            properties:
+                title:
+                    type: string
+                description:
+                    type: string
+                body:
+                    type: string
+                tagList:
+                    type: array
+                    items:
+                        type: string
+        api.realworld.v1.CreateCommentReply:
             type: object
             properties:
                 comment:
-                    $ref: '#/components/schemas/AddCommentRequest_Comment'
-                slug:
-                    type: string
-        AddCommentRequest_Comment:
-            type: object
-            properties:
-                body:
-                    type: string
-        CommentResponse:
+                    $ref: '#/components/schemas/api.realworld.v1.CreateCommentReply_CommentResponse'
+        api.realworld.v1.CreateCommentReply_CommentResponse:
             type: object
             properties:
                 id:
@@ -547,115 +426,8 @@ components:
                 body:
                     type: string
                 author:
-                    $ref: '#/components/schemas/ProfileResponse'
-        CreateArticleRequest:
-            type: object
-            properties:
-                article:
-                    $ref: '#/components/schemas/CreateArticleRequest_Article'
-        CreateArticleRequest_Article:
-            type: object
-            properties:
-                title:
-                    type: string
-                description:
-                    type: string
-                body:
-                    type: string
-                tagList:
-                    type: array
-                    items:
-                        type: string
-        FavoriteArticleRequest:
-            type: object
-            properties:
-                slug:
-                    type: string
-        FollowProfileRequest:
-            type: object
-            properties:
-                username:
-                    type: string
-        GoogleProtobufAny:
-            type: object
-            properties:
-                '@type':
-                    type: string
-                    description: The type of the serialized message.
-            additionalProperties: true
-            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
-        LoginRequest:
-            type: object
-            properties:
-                user:
-                    $ref: '#/components/schemas/LoginRequest_User'
-        LoginRequest_User:
-            type: object
-            properties:
-                email:
-                    type: string
-                password:
-                    type: string
-        LoginResponse:
-            type: object
-            properties:
-                user:
-                    $ref: '#/components/schemas/LoginResponse_User'
-        LoginResponse_User:
-            type: object
-            properties:
-                username:
-                    type: string
-                email:
-                    type: string
-                password:
-                    type: string
-                bio:
-                    type: string
-                image:
-                    type: string
-        MultipleArticlesResponse:
-            type: object
-            properties:
-                articles:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/MultipleArticlesResponse_Article'
-                articlesCount:
-                    type: string
-        MultipleArticlesResponse_Article:
-            type: object
-            properties:
-                slug:
-                    type: string
-                title:
-                    type: string
-                description:
-                    type: string
-                tagList:
-                    type: array
-                    items:
-                        type: string
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
-                favorited:
-                    type: boolean
-                favoritesCount:
-                    type: string
-                author:
-                    $ref: '#/components/schemas/ProfileResponse'
-        MultipleCommentsResponse:
-            type: object
-            properties:
-                comments:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/CommentResponse'
-                author:
-                    $ref: '#/components/schemas/ProfileResponse'
-        ProfileResponse:
+                    $ref: '#/components/schemas/api.realworld.v1.CreateCommentReply_ProfileResponse'
+        api.realworld.v1.CreateCommentReply_ProfileResponse:
             type: object
             properties:
                 username:
@@ -666,104 +438,37 @@ components:
                     type: string
                 following:
                     type: boolean
-        RegisterRequest:
+        api.realworld.v1.CreateCommentRequest:
             type: object
             properties:
-                user:
-                    $ref: '#/components/schemas/RegisterRequest_User'
-        RegisterRequest_User:
-            type: object
-            properties:
-                username:
-                    type: string
-                email:
-                    type: string
-                password:
-                    type: string
-        RegisterResponse:
-            type: object
-            properties:
-                name:
-                    type: string
-        SingleArticleResponse:
-            type: object
-            properties:
+                comment:
+                    $ref: '#/components/schemas/api.realworld.v1.CreateCommentRequest_Comment'
                 slug:
                     type: string
-                title:
-                    type: string
-                description:
-                    type: string
+        api.realworld.v1.CreateCommentRequest_Comment:
+            type: object
+            properties:
                 body:
                     type: string
-                tagList:
-                    type: array
-                    items:
-                        type: string
+        api.realworld.v1.DeleteCommentReply:
+            type: object
+            properties:
+                comment:
+                    $ref: '#/components/schemas/api.realworld.v1.DeleteCommentReply_CommentResponse'
+        api.realworld.v1.DeleteCommentReply_CommentResponse:
+            type: object
+            properties:
+                id:
+                    type: string
                 createdAt:
                     type: string
                 updatedAt:
                     type: string
-                favorited:
-                    type: string
-                favoritesCount:
-                    type: string
-                author:
-                    $ref: '#/components/schemas/ProfileResponse'
-        SingleCommentResponse:
-            type: object
-            properties:
-                comment:
-                    $ref: '#/components/schemas/CommentResponse'
-        Status:
-            type: object
-            properties:
-                code:
-                    type: integer
-                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
-                    format: int32
-                message:
-                    type: string
-                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
-                details:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/GoogleProtobufAny'
-                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
-            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
-        TagListResponse:
-            type: object
-            properties:
-                Tags:
-                    type: array
-                    items:
-                        type: string
-        UpdateArticlesRequest:
-            type: object
-            properties:
-                article:
-                    $ref: '#/components/schemas/UpdateArticlesRequest_Article'
-                slug:
-                    type: string
-        UpdateArticlesRequest_Article:
-            type: object
-            properties:
-                title:
-                    type: string
-                description:
-                    type: string
                 body:
                     type: string
-                tagList:
-                    type: array
-                    items:
-                        type: string
-        UpdateUserRequest:
-            type: object
-            properties:
-                user:
-                    $ref: '#/components/schemas/UpdateUserRequest_User'
-        UpdateUserRequest_User:
+                author:
+                    $ref: '#/components/schemas/api.realworld.v1.DeleteCommentReply_ProfileResponse'
+        api.realworld.v1.DeleteCommentReply_ProfileResponse:
             type: object
             properties:
                 username:
@@ -772,12 +477,63 @@ components:
                     type: string
                 image:
                     type: string
-        UserResponse:
+                following:
+                    type: boolean
+        api.realworld.v1.FavoriteArticleRequest:
+            type: object
+            properties:
+                slug:
+                    type: string
+        api.realworld.v1.FollowProfileRequest:
+            type: object
+            properties:
+                username:
+                    type: string
+        api.realworld.v1.GetArticlesReply:
+            type: object
+            properties: {}
+        api.realworld.v1.GetCommentReply:
+            type: object
+            properties:
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.realworld.v1.GetCommentReply_CommentResponse'
+                author:
+                    $ref: '#/components/schemas/api.realworld.v1.GetCommentReply_ProfileResponse'
+        api.realworld.v1.GetCommentReply_CommentResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                body:
+                    type: string
+                author:
+                    $ref: '#/components/schemas/api.realworld.v1.GetCommentReply_ProfileResponse'
+        api.realworld.v1.GetCommentReply_ProfileResponse:
+            type: object
+            properties:
+                username:
+                    type: string
+                bio:
+                    type: string
+                image:
+                    type: string
+                following:
+                    type: boolean
+        api.realworld.v1.GetProfileReply:
+            type: object
+            properties: {}
+        api.realworld.v1.GetUserReply:
             type: object
             properties:
                 user:
-                    $ref: '#/components/schemas/UserResponse_User'
-        UserResponse_User:
+                    $ref: '#/components/schemas/api.realworld.v1.GetUserReply_User'
+        api.realworld.v1.GetUserReply_User:
             type: object
             properties:
                 email:
@@ -790,5 +546,183 @@ components:
                     type: string
                 image:
                     type: string
+        api.realworld.v1.ListTagReply:
+            type: object
+            properties:
+                Tags:
+                    type: array
+                    items:
+                        type: string
+        api.realworld.v1.MultipleArticlesReply:
+            type: object
+            properties:
+                articles:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.realworld.v1.MultipleArticlesReply_Article'
+                articlesCount:
+                    type: string
+        api.realworld.v1.MultipleArticlesReply_Article:
+            type: object
+            properties:
+                slug:
+                    type: string
+                title:
+                    type: string
+                description:
+                    type: string
+                tagList:
+                    type: array
+                    items:
+                        type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                favorited:
+                    type: boolean
+                favoritesCount:
+                    type: string
+                author:
+                    $ref: '#/components/schemas/api.realworld.v1.ProfileReply'
+        api.realworld.v1.ProfileReply:
+            type: object
+            properties:
+                username:
+                    type: string
+                bio:
+                    type: string
+                image:
+                    type: string
+                following:
+                    type: boolean
+        api.realworld.v1.ProfileResponse:
+            type: object
+            properties:
+                username:
+                    type: string
+                bio:
+                    type: string
+                image:
+                    type: string
+                following:
+                    type: boolean
+        api.realworld.v1.SingleArticleReply:
+            type: object
+            properties:
+                slug:
+                    type: string
+                title:
+                    type: string
+                description:
+                    type: string
+                body:
+                    type: string
+                tagList:
+                    type: array
+                    items:
+                        type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                favorited:
+                    type: string
+                favoritesCount:
+                    type: string
+                author:
+                    $ref: '#/components/schemas/api.realworld.v1.ProfileReply'
+        api.realworld.v1.UpdateArticleRequest:
+            type: object
+            properties:
+                article:
+                    $ref: '#/components/schemas/api.realworld.v1.UpdateArticleRequest_Article'
+                slug:
+                    type: string
+        api.realworld.v1.UpdateArticleRequest_Article:
+            type: object
+            properties:
+                title:
+                    type: string
+                description:
+                    type: string
+                body:
+                    type: string
+                tagList:
+                    type: array
+                    items:
+                        type: string
+        api.realworld.v1.UpdateUserReply:
+            type: object
+            properties: {}
+        api.realworld.v1.UpdateUserRequest:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/api.realworld.v1.UpdateUserRequest_User'
+        api.realworld.v1.UpdateUserRequest_User:
+            type: object
+            properties:
+                username:
+                    type: string
+                bio:
+                    type: string
+                image:
+                    type: string
+        realworld.v1.LoginRequest:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/realworld.v1.LoginRequest_User'
+        realworld.v1.LoginRequest_User:
+            type: object
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+        realworld.v1.LoginResponse:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/realworld.v1.LoginResponse_User'
+        realworld.v1.LoginResponse_User:
+            type: object
+            properties:
+                username:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+                bio:
+                    type: string
+                image:
+                    type: string
+        realworld.v1.RegisterRequest:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/realworld.v1.RegisterRequest_User'
+        realworld.v1.RegisterRequest_User:
+            type: object
+            properties:
+                username:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+        realworld.v1.RegisterResponse:
+            type: object
+            properties:
+                name:
+                    type: string
 tags:
+    - name: Article
+    - name: Comment
+    - name: Profile
     - name: RealWorld
+      description: RealWorld
+    - name: Tag
+    - name: User

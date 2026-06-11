@@ -2,13 +2,34 @@ package service
 
 import (
 	"context"
-	v1 "kratos-realworld/api/realworld/v1"
+
+	pb "kratos-realworld/api/realworld/v1"
 )
 
-func (s *RealWorldService) Login(ctx context.Context, res *v1.LoginRequest) (req *v1.LoginResponse, err error) {
-	return &v1.LoginResponse{
-		User: &v1.LoginResponse_User{
+type UserService struct {
+	pb.UnimplementedUserServer
+}
+
+func NewUserService() *UserService {
+	return &UserService{}
+}
+
+func (s *UserService) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserReply, error) {
+	return &pb.CreateUserReply{}, nil
+}
+func (s *UserService) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.UpdateUserReply, error) {
+	return &pb.UpdateUserReply{}, nil
+}
+func (s *UserService) DeleteUser(ctx context.Context, req *pb.DeleteUserRequest) (*pb.DeleteUserReply, error) {
+	return &pb.DeleteUserReply{}, nil
+}
+func (s *UserService) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserReply, error) {
+	return &pb.GetUserReply{
+		User: &pb.GetUserReply_User{
 			Username: "jack",
 		},
 	}, nil
+}
+func (s *UserService) ListUser(ctx context.Context, req *pb.ListUserRequest) (*pb.ListUserReply, error) {
+	return &pb.ListUserReply{}, nil
 }

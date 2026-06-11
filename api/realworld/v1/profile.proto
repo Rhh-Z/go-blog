@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package api.realworld.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "kratos-realworld/api/realworld/v1;v1";
+
+
+service Profile {
+  rpc CreateProfile (CreateProfileRequest) returns (CreateProfileReply);
+  rpc UpdateProfile (UpdateProfileRequest) returns (UpdateProfileReply);
+  rpc DeleteProfile (DeleteProfileRequest) returns (DeleteProfileReply);
+	// 获取用户信息
+  rpc GetProfile (GetProfileRequest) returns (GetProfileReply) {
+    option (google.api.http) = {
+      get: "/api/profiles/{username}",
+    };
+  };
+  rpc ListProfile (ListProfileRequest) returns (ListProfileReply);
+  // 关注用户
+  rpc FollowProfile(FollowProfileRequest) returns (ProfileResponse){
+    option (google.api.http) = {
+      post: "/api/profiles/{username}/follow",
+      body: "*"
+    } ;
+  };
+  // 取消关注
+  rpc UnfollowProfile(UnfollowProfileRequest) returns (ProfileResponse){
+    option (google.api.http) = {
+      delete: "/api/profiles/{username}/follow",
+    } ;
+  };
+}
+
+message UnfollowProfileRequest {
+  string username = 1;
+}
+
+message FollowProfileRequest {
+  string username = 1;
+}
+
+message ProfileResponse {
+  string username  = 1;
+  string bio       = 2;
+  string image     = 3;
+  bool   following = 4;
+}
+
+message CreateProfileRequest {}
+
+message CreateProfileReply {}
+
+message UpdateProfileRequest {}
+
+message UpdateProfileReply {}
+
+message DeleteProfileRequest {}
+
+message DeleteProfileReply {}
+
+message GetProfileRequest {
+  string username = 1;
+}
+
+message GetProfileReply {}
+
+message ListProfileRequest {}
+
+message ListProfileReply {}
