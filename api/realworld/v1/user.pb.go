@@ -23,7 +23,8 @@ const (
 )
 
 type CreateUserRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	User          *CreateUserRequest_User `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -58,8 +59,16 @@ func (*CreateUserRequest) Descriptor() ([]byte, []int) {
 	return file_realworld_v1_user_proto_rawDescGZIP(), []int{0}
 }
 
+func (x *CreateUserRequest) GetUser() *CreateUserRequest_User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
 type CreateUserReply struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -92,6 +101,13 @@ func (x *CreateUserReply) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateUserReply.ProtoReflect.Descriptor instead.
 func (*CreateUserReply) Descriptor() ([]byte, []int) {
 	return file_realworld_v1_user_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateUserReply) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
 }
 
 type UpdateUserRequest struct {
@@ -398,6 +414,66 @@ func (*ListUserReply) Descriptor() ([]byte, []int) {
 	return file_realworld_v1_user_proto_rawDescGZIP(), []int{9}
 }
 
+type CreateUserRequest_User struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUserRequest_User) Reset() {
+	*x = CreateUserRequest_User{}
+	mi := &file_realworld_v1_user_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUserRequest_User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserRequest_User) ProtoMessage() {}
+
+func (x *CreateUserRequest_User) ProtoReflect() protoreflect.Message {
+	mi := &file_realworld_v1_user_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserRequest_User.ProtoReflect.Descriptor instead.
+func (*CreateUserRequest_User) Descriptor() ([]byte, []int) {
+	return file_realworld_v1_user_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *CreateUserRequest_User) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *CreateUserRequest_User) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *CreateUserRequest_User) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
 type UpdateUserRequest_User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
@@ -409,7 +485,7 @@ type UpdateUserRequest_User struct {
 
 func (x *UpdateUserRequest_User) Reset() {
 	*x = UpdateUserRequest_User{}
-	mi := &file_realworld_v1_user_proto_msgTypes[10]
+	mi := &file_realworld_v1_user_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -421,7 +497,7 @@ func (x *UpdateUserRequest_User) String() string {
 func (*UpdateUserRequest_User) ProtoMessage() {}
 
 func (x *UpdateUserRequest_User) ProtoReflect() protoreflect.Message {
-	mi := &file_realworld_v1_user_proto_msgTypes[10]
+	mi := &file_realworld_v1_user_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -471,7 +547,7 @@ type GetUserReply_User struct {
 
 func (x *GetUserReply_User) Reset() {
 	*x = GetUserReply_User{}
-	mi := &file_realworld_v1_user_proto_msgTypes[11]
+	mi := &file_realworld_v1_user_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -483,7 +559,7 @@ func (x *GetUserReply_User) String() string {
 func (*GetUserReply_User) ProtoMessage() {}
 
 func (x *GetUserReply_User) ProtoReflect() protoreflect.Message {
-	mi := &file_realworld_v1_user_proto_msgTypes[11]
+	mi := &file_realworld_v1_user_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -538,9 +614,15 @@ var File_realworld_v1_user_proto protoreflect.FileDescriptor
 
 const file_realworld_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x17realworld/v1/user.proto\x12\x10api.realworld.v1\x1a\x1cgoogle/api/annotations.proto\"\x13\n" +
-	"\x11CreateUserRequest\"\x11\n" +
-	"\x0fCreateUserReply\"\x9d\x01\n" +
+	"\x17realworld/v1/user.proto\x12\x10api.realworld.v1\x1a\x1cgoogle/api/annotations.proto\"\xa7\x01\n" +
+	"\x11CreateUserRequest\x12<\n" +
+	"\x04user\x18\x01 \x01(\v2(.api.realworld.v1.CreateUserRequest.UserR\x04user\x1aT\n" +
+	"\x04User\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\"%\n" +
+	"\x0fCreateUserReply\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x9d\x01\n" +
 	"\x11UpdateUserRequest\x12<\n" +
 	"\x04user\x18\x01 \x01(\v2(.api.realworld.v1.UpdateUserRequest.UserR\x04user\x1aJ\n" +
 	"\x04User\x12\x1a\n" +
@@ -560,13 +642,13 @@ const file_realworld_v1_user_proto_rawDesc = "" +
 	"\x03bio\x18\x04 \x01(\tR\x03bio\x12\x14\n" +
 	"\x05image\x18\x05 \x01(\tR\x05image\"\x11\n" +
 	"\x0fListUserRequest\"\x0f\n" +
-	"\rListUserReply2\xcf\x03\n" +
-	"\x04User\x12T\n" +
+	"\rListUserReply2\xe5\x03\n" +
+	"\x04User\x12k\n" +
 	"\n" +
-	"CreateUser\x12#.api.realworld.v1.CreateUserRequest\x1a!.api.realworld.v1.CreateUserReply\x12k\n" +
+	"CreateUser\x12#.api.realworld.v1.CreateUserRequest\x1a!.api.realworld.v1.CreateUserReply\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
+	"/api/users\x12j\n" +
 	"\n" +
-	"UpdateUser\x12#.api.realworld.v1.UpdateUserRequest\x1a!.api.realworld.v1.UpdateUserReply\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\x1a\n" +
-	"/api/users\x12T\n" +
+	"UpdateUser\x12#.api.realworld.v1.UpdateUserRequest\x1a!.api.realworld.v1.UpdateUserReply\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\x1a\t/api/user\x12T\n" +
 	"\n" +
 	"DeleteUser\x12#.api.realworld.v1.DeleteUserRequest\x1a!.api.realworld.v1.DeleteUserReply\x12^\n" +
 	"\aGetUser\x12 .api.realworld.v1.GetUserRequest\x1a\x1e.api.realworld.v1.GetUserReply\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/api/user\x12N\n" +
@@ -584,7 +666,7 @@ func file_realworld_v1_user_proto_rawDescGZIP() []byte {
 	return file_realworld_v1_user_proto_rawDescData
 }
 
-var file_realworld_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_realworld_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_realworld_v1_user_proto_goTypes = []any{
 	(*CreateUserRequest)(nil),      // 0: api.realworld.v1.CreateUserRequest
 	(*CreateUserReply)(nil),        // 1: api.realworld.v1.CreateUserReply
@@ -596,27 +678,29 @@ var file_realworld_v1_user_proto_goTypes = []any{
 	(*GetUserReply)(nil),           // 7: api.realworld.v1.GetUserReply
 	(*ListUserRequest)(nil),        // 8: api.realworld.v1.ListUserRequest
 	(*ListUserReply)(nil),          // 9: api.realworld.v1.ListUserReply
-	(*UpdateUserRequest_User)(nil), // 10: api.realworld.v1.UpdateUserRequest.User
-	(*GetUserReply_User)(nil),      // 11: api.realworld.v1.GetUserReply.User
+	(*CreateUserRequest_User)(nil), // 10: api.realworld.v1.CreateUserRequest.User
+	(*UpdateUserRequest_User)(nil), // 11: api.realworld.v1.UpdateUserRequest.User
+	(*GetUserReply_User)(nil),      // 12: api.realworld.v1.GetUserReply.User
 }
 var file_realworld_v1_user_proto_depIdxs = []int32{
-	10, // 0: api.realworld.v1.UpdateUserRequest.user:type_name -> api.realworld.v1.UpdateUserRequest.User
-	11, // 1: api.realworld.v1.GetUserReply.user:type_name -> api.realworld.v1.GetUserReply.User
-	0,  // 2: api.realworld.v1.User.CreateUser:input_type -> api.realworld.v1.CreateUserRequest
-	2,  // 3: api.realworld.v1.User.UpdateUser:input_type -> api.realworld.v1.UpdateUserRequest
-	4,  // 4: api.realworld.v1.User.DeleteUser:input_type -> api.realworld.v1.DeleteUserRequest
-	6,  // 5: api.realworld.v1.User.GetUser:input_type -> api.realworld.v1.GetUserRequest
-	8,  // 6: api.realworld.v1.User.ListUser:input_type -> api.realworld.v1.ListUserRequest
-	1,  // 7: api.realworld.v1.User.CreateUser:output_type -> api.realworld.v1.CreateUserReply
-	3,  // 8: api.realworld.v1.User.UpdateUser:output_type -> api.realworld.v1.UpdateUserReply
-	5,  // 9: api.realworld.v1.User.DeleteUser:output_type -> api.realworld.v1.DeleteUserReply
-	7,  // 10: api.realworld.v1.User.GetUser:output_type -> api.realworld.v1.GetUserReply
-	9,  // 11: api.realworld.v1.User.ListUser:output_type -> api.realworld.v1.ListUserReply
-	7,  // [7:12] is the sub-list for method output_type
-	2,  // [2:7] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	10, // 0: api.realworld.v1.CreateUserRequest.user:type_name -> api.realworld.v1.CreateUserRequest.User
+	11, // 1: api.realworld.v1.UpdateUserRequest.user:type_name -> api.realworld.v1.UpdateUserRequest.User
+	12, // 2: api.realworld.v1.GetUserReply.user:type_name -> api.realworld.v1.GetUserReply.User
+	0,  // 3: api.realworld.v1.User.CreateUser:input_type -> api.realworld.v1.CreateUserRequest
+	2,  // 4: api.realworld.v1.User.UpdateUser:input_type -> api.realworld.v1.UpdateUserRequest
+	4,  // 5: api.realworld.v1.User.DeleteUser:input_type -> api.realworld.v1.DeleteUserRequest
+	6,  // 6: api.realworld.v1.User.GetUser:input_type -> api.realworld.v1.GetUserRequest
+	8,  // 7: api.realworld.v1.User.ListUser:input_type -> api.realworld.v1.ListUserRequest
+	1,  // 8: api.realworld.v1.User.CreateUser:output_type -> api.realworld.v1.CreateUserReply
+	3,  // 9: api.realworld.v1.User.UpdateUser:output_type -> api.realworld.v1.UpdateUserReply
+	5,  // 10: api.realworld.v1.User.DeleteUser:output_type -> api.realworld.v1.DeleteUserReply
+	7,  // 11: api.realworld.v1.User.GetUser:output_type -> api.realworld.v1.GetUserReply
+	9,  // 12: api.realworld.v1.User.ListUser:output_type -> api.realworld.v1.ListUserReply
+	8,  // [8:13] is the sub-list for method output_type
+	3,  // [3:8] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_realworld_v1_user_proto_init() }
@@ -630,7 +714,7 @@ func file_realworld_v1_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_realworld_v1_user_proto_rawDesc), len(file_realworld_v1_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

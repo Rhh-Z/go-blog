@@ -110,94 +110,6 @@ func (x *LoginResponse) GetUser() *LoginResponse_User {
 	return nil
 }
 
-type RegisterRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	User          *RegisterRequest_User  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegisterRequest) Reset() {
-	*x = RegisterRequest{}
-	mi := &file_realworld_v1_realworld_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegisterRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegisterRequest) ProtoMessage() {}
-
-func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_realworld_v1_realworld_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
-func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return file_realworld_v1_realworld_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *RegisterRequest) GetUser() *RegisterRequest_User {
-	if x != nil {
-		return x.User
-	}
-	return nil
-}
-
-type RegisterResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegisterResponse) Reset() {
-	*x = RegisterResponse{}
-	mi := &file_realworld_v1_realworld_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegisterResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegisterResponse) ProtoMessage() {}
-
-func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_realworld_v1_realworld_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegisterResponse.ProtoReflect.Descriptor instead.
-func (*RegisterResponse) Descriptor() ([]byte, []int) {
-	return file_realworld_v1_realworld_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *RegisterResponse) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
 type LoginRequest_User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
@@ -208,7 +120,7 @@ type LoginRequest_User struct {
 
 func (x *LoginRequest_User) Reset() {
 	*x = LoginRequest_User{}
-	mi := &file_realworld_v1_realworld_proto_msgTypes[4]
+	mi := &file_realworld_v1_realworld_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -220,7 +132,7 @@ func (x *LoginRequest_User) String() string {
 func (*LoginRequest_User) ProtoMessage() {}
 
 func (x *LoginRequest_User) ProtoReflect() protoreflect.Message {
-	mi := &file_realworld_v1_realworld_proto_msgTypes[4]
+	mi := &file_realworld_v1_realworld_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -263,7 +175,7 @@ type LoginResponse_User struct {
 
 func (x *LoginResponse_User) Reset() {
 	*x = LoginResponse_User{}
-	mi := &file_realworld_v1_realworld_proto_msgTypes[5]
+	mi := &file_realworld_v1_realworld_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -275,7 +187,7 @@ func (x *LoginResponse_User) String() string {
 func (*LoginResponse_User) ProtoMessage() {}
 
 func (x *LoginResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_realworld_v1_realworld_proto_msgTypes[5]
+	mi := &file_realworld_v1_realworld_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -326,66 +238,6 @@ func (x *LoginResponse_User) GetImage() string {
 	return ""
 }
 
-type RegisterRequest_User struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
-	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegisterRequest_User) Reset() {
-	*x = RegisterRequest_User{}
-	mi := &file_realworld_v1_realworld_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegisterRequest_User) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegisterRequest_User) ProtoMessage() {}
-
-func (x *RegisterRequest_User) ProtoReflect() protoreflect.Message {
-	mi := &file_realworld_v1_realworld_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegisterRequest_User.ProtoReflect.Descriptor instead.
-func (*RegisterRequest_User) Descriptor() ([]byte, []int) {
-	return file_realworld_v1_realworld_proto_rawDescGZIP(), []int{2, 0}
-}
-
-func (x *RegisterRequest_User) GetUsername() string {
-	if x != nil {
-		return x.Username
-	}
-	return ""
-}
-
-func (x *RegisterRequest_User) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *RegisterRequest_User) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
 var File_realworld_v1_realworld_proto protoreflect.FileDescriptor
 
 const file_realworld_v1_realworld_proto_rawDesc = "" +
@@ -403,19 +255,9 @@ const file_realworld_v1_realworld_proto_rawDesc = "" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x10\n" +
 	"\x03bio\x18\x04 \x01(\tR\x03bio\x12\x14\n" +
-	"\x05image\x18\x05 \x01(\tR\x05image\"\x9f\x01\n" +
-	"\x0fRegisterRequest\x126\n" +
-	"\x04user\x18\x01 \x01(\v2\".realworld.v1.RegisterRequest.UserR\x04user\x1aT\n" +
-	"\x04User\x12\x1a\n" +
-	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\"&\n" +
-	"\x10RegisterResponse\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name2\xcc\x01\n" +
+	"\x05image\x18\x05 \x01(\tR\x05image2j\n" +
 	"\tRealWorld\x12]\n" +
-	"\x05Login\x12\x1a.realworld.v1.LoginRequest\x1a\x1b.realworld.v1.LoginResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/users/login\x12`\n" +
-	"\bRegister\x12\x1d.realworld.v1.RegisterRequest\x1a\x1e.realworld.v1.RegisterResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
-	"/api/usersB\x1fZ\x1drealworld/api/realworld/v1;v1b\x06proto3"
+	"\x05Login\x12\x1a.realworld.v1.LoginRequest\x1a\x1b.realworld.v1.LoginResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/users/loginB\x1fZ\x1drealworld/api/realworld/v1;v1b\x06proto3"
 
 var (
 	file_realworld_v1_realworld_proto_rawDescOnce sync.Once
@@ -429,29 +271,23 @@ func file_realworld_v1_realworld_proto_rawDescGZIP() []byte {
 	return file_realworld_v1_realworld_proto_rawDescData
 }
 
-var file_realworld_v1_realworld_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_realworld_v1_realworld_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_realworld_v1_realworld_proto_goTypes = []any{
-	(*LoginRequest)(nil),         // 0: realworld.v1.LoginRequest
-	(*LoginResponse)(nil),        // 1: realworld.v1.LoginResponse
-	(*RegisterRequest)(nil),      // 2: realworld.v1.RegisterRequest
-	(*RegisterResponse)(nil),     // 3: realworld.v1.RegisterResponse
-	(*LoginRequest_User)(nil),    // 4: realworld.v1.LoginRequest.User
-	(*LoginResponse_User)(nil),   // 5: realworld.v1.LoginResponse.User
-	(*RegisterRequest_User)(nil), // 6: realworld.v1.RegisterRequest.User
+	(*LoginRequest)(nil),       // 0: realworld.v1.LoginRequest
+	(*LoginResponse)(nil),      // 1: realworld.v1.LoginResponse
+	(*LoginRequest_User)(nil),  // 2: realworld.v1.LoginRequest.User
+	(*LoginResponse_User)(nil), // 3: realworld.v1.LoginResponse.User
 }
 var file_realworld_v1_realworld_proto_depIdxs = []int32{
-	4, // 0: realworld.v1.LoginRequest.user:type_name -> realworld.v1.LoginRequest.User
-	5, // 1: realworld.v1.LoginResponse.user:type_name -> realworld.v1.LoginResponse.User
-	6, // 2: realworld.v1.RegisterRequest.user:type_name -> realworld.v1.RegisterRequest.User
-	0, // 3: realworld.v1.RealWorld.Login:input_type -> realworld.v1.LoginRequest
-	2, // 4: realworld.v1.RealWorld.Register:input_type -> realworld.v1.RegisterRequest
-	1, // 5: realworld.v1.RealWorld.Login:output_type -> realworld.v1.LoginResponse
-	3, // 6: realworld.v1.RealWorld.Register:output_type -> realworld.v1.RegisterResponse
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	2, // 0: realworld.v1.LoginRequest.user:type_name -> realworld.v1.LoginRequest.User
+	3, // 1: realworld.v1.LoginResponse.user:type_name -> realworld.v1.LoginResponse.User
+	0, // 2: realworld.v1.RealWorld.Login:input_type -> realworld.v1.LoginRequest
+	1, // 3: realworld.v1.RealWorld.Login:output_type -> realworld.v1.LoginResponse
+	3, // [3:4] is the sub-list for method output_type
+	2, // [2:3] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_realworld_v1_realworld_proto_init() }
@@ -465,7 +301,7 @@ func file_realworld_v1_realworld_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_realworld_v1_realworld_proto_rawDesc), len(file_realworld_v1_realworld_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

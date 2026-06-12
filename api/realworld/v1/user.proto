@@ -7,11 +7,17 @@ import "google/api/annotations.proto";
 option go_package = "kratos-realworld/api/realworld/v1;v1";
 
 service User {
-  rpc CreateUser (CreateUserRequest) returns (CreateUserReply);
+  // 注册
+  rpc CreateUser (CreateUserRequest) returns (CreateUserReply){
+    option (google.api.http) = {
+      post: "/api/users",
+      body: "*",
+    };
+  };
 	// 更新用户
   rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply){
     option (google.api.http) = {
-      put : "/api/users",
+      put : "/api/user",
       body: "*"
     };
   };
@@ -25,9 +31,18 @@ service User {
   rpc ListUser (ListUserRequest) returns (ListUserReply);
 }
 
-message CreateUserRequest {}
+message CreateUserRequest {
+  message User {
+    string username = 1;
+    string email    = 2;
+    string password = 3;
+  }
+  User user = 1;
+}
 
-message CreateUserReply {}
+message CreateUserReply {
+  string name = 1;
+}
 
 message UpdateUserRequest {
   message User {

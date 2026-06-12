@@ -333,7 +333,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.realworld.v1.GetUserReply'
-    /api/users:
         put:
             tags:
                 - User
@@ -352,16 +351,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.realworld.v1.UpdateUserReply'
+    /api/users:
         post:
             tags:
-                - RealWorld
+                - User
             description: 注册
-            operationId: RealWorld_Register
+            operationId: User_CreateUser
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/realworld.v1.RegisterRequest'
+                            $ref: '#/components/schemas/api.realworld.v1.CreateUserRequest'
                 required: true
             responses:
                 "200":
@@ -369,7 +369,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.RegisterResponse'
+                                $ref: '#/components/schemas/api.realworld.v1.CreateUserReply'
     /api/users/login:
         post:
             tags:
@@ -449,6 +449,25 @@ components:
             type: object
             properties:
                 body:
+                    type: string
+        api.realworld.v1.CreateUserReply:
+            type: object
+            properties:
+                name:
+                    type: string
+        api.realworld.v1.CreateUserRequest:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/api.realworld.v1.CreateUserRequest_User'
+        api.realworld.v1.CreateUserRequest_User:
+            type: object
+            properties:
+                username:
+                    type: string
+                email:
+                    type: string
+                password:
                     type: string
         api.realworld.v1.DeleteCommentReply:
             type: object
@@ -698,25 +717,6 @@ components:
                 bio:
                     type: string
                 image:
-                    type: string
-        realworld.v1.RegisterRequest:
-            type: object
-            properties:
-                user:
-                    $ref: '#/components/schemas/realworld.v1.RegisterRequest_User'
-        realworld.v1.RegisterRequest_User:
-            type: object
-            properties:
-                username:
-                    type: string
-                email:
-                    type: string
-                password:
-                    type: string
-        realworld.v1.RegisterResponse:
-            type: object
-            properties:
-                name:
                     type: string
 tags:
     - name: Article

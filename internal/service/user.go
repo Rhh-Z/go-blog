@@ -4,32 +4,38 @@ import (
 	"context"
 
 	pb "kratos-realworld/api/realworld/v1"
+	"kratos-realworld/internal/biz"
 )
 
 type UserService struct {
 	pb.UnimplementedUserServer
+	uc *biz.UserUsecase
 }
 
-func NewUserService() *UserService {
-	return &UserService{}
+func NewUserService(uc *biz.UserUsecase) *UserService {
+	return &UserService{uc: uc}
 }
 
-func (s *UserService) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserReply, error) {
-	return &pb.CreateUserReply{}, nil
-}
-func (s *UserService) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.UpdateUserReply, error) {
-	return &pb.UpdateUserReply{}, nil
-}
-func (s *UserService) DeleteUser(ctx context.Context, req *pb.DeleteUserRequest) (*pb.DeleteUserReply, error) {
-	return &pb.DeleteUserReply{}, nil
-}
-func (s *UserService) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserReply, error) {
-	return &pb.GetUserReply{
-		User: &pb.GetUserReply_User{
-			Username: "jack",
-		},
+func (userService *UserService) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserReply, error) {
+	userService.uc.CreateUser(ctx, &biz.User{
+		Email:    req.User.Email,
+		Username: req.User.Username,
+		Password: req.User.Password,
+	})
+
+	return &pb.CreateUserReply{
+		Name: req.User.Username,
 	}, nil
 }
-func (s *UserService) ListUser(ctx context.Context, req *pb.ListUserRequest) (*pb.ListUserReply, error) {
+func (userService *UserService) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.UpdateUserReply, error) {
+	return &pb.UpdateUserReply{}, nil
+}
+func (userService *UserService) DeleteUser(ctx context.Context, req *pb.DeleteUserRequest) (*pb.DeleteUserReply, error) {
+	return &pb.DeleteUserReply{}, nil
+}
+func (userService *UserService) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserReply, error) {
+	return &pb.GetUserReply{}, nil
+}
+func (userService *UserService) ListUser(ctx context.Context, req *pb.ListUserRequest) (*pb.ListUserReply, error) {
 	return &pb.ListUserReply{}, nil
 }

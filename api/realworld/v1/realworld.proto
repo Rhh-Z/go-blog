@@ -15,13 +15,6 @@ service RealWorld {
       body: "*",
     };
   };
-  // 注册
-  rpc Register(RegisterRequest) returns (RegisterResponse) {
-    option (google.api.http) = {
-      post: "/api/users",
-      body: "*",
-    };
-  };
 }
 
 message LoginRequest {
@@ -41,17 +34,4 @@ message LoginResponse {
     string image    = 5;
   }
   User user = 1;
-}
-
-message RegisterRequest {
-  message User {
-    string username = 1;
-    string email    = 2;
-    string password = 3;
-  }
-  User user = 1;
-}
-
-message RegisterResponse {
-  string name = 1;
 }

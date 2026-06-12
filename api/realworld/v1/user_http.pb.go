@@ -19,10 +19,13 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationUserCreateUser = "/api.realworld.v1.User/CreateUser"
 const OperationUserGetUser = "/api.realworld.v1.User/GetUser"
 const OperationUserUpdateUser = "/api.realworld.v1.User/UpdateUser"
 
 type UserHTTPServer interface {
+	// CreateUser 注册
+	CreateUser(context.Context, *CreateUserRequest) (*CreateUserReply, error)
 	// GetUser 获取用户
 	GetUser(context.Context, *GetUserRequest) (*GetUserReply, error)
 	// UpdateUser 更新用户
@@ -31,8 +34,31 @@ type UserHTTPServer interface {
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
-	r.PUT("/api/users", _User_UpdateUser0_HTTP_Handler(srv))
+	r.POST("/api/users", _User_CreateUser0_HTTP_Handler(srv))
+	r.PUT("/api/user", _User_UpdateUser0_HTTP_Handler(srv))
 	r.GET("/api/user", _User_GetUser0_HTTP_Handler(srv))
+}
+
+func _User_CreateUser0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateUserRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserCreateUser)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateUser(ctx, req.(*CreateUserRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateUserReply)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _User_UpdateUser0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -77,6 +103,8 @@ func _User_GetUser0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) erro
 }
 
 type UserHTTPClient interface {
+	// CreateUser 注册
+	CreateUser(ctx context.Context, req *CreateUserRequest, opts ...http.CallOption) (rsp *CreateUserReply, err error)
 	// GetUser 获取用户
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserReply, err error)
 	// UpdateUser 更新用户
@@ -89,6 +117,20 @@ type UserHTTPClientImpl struct {
 
 func NewUserHTTPClient(client *http.Client) UserHTTPClient {
 	return &UserHTTPClientImpl{client}
+}
+
+// CreateUser 注册
+func (c *UserHTTPClientImpl) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...http.CallOption) (*CreateUserReply, error) {
+	var out CreateUserReply
+	pattern := "/api/users"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserCreateUser))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 // GetUser 获取用户
@@ -108,7 +150,7 @@ func (c *UserHTTPClientImpl) GetUser(ctx context.Context, in *GetUserRequest, op
 // UpdateUser 更新用户
 func (c *UserHTTPClientImpl) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...http.CallOption) (*UpdateUserReply, error) {
 	var out UpdateUserReply
-	pattern := "/api/users"
+	pattern := "/api/user"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserUpdateUser))
 	opts = append(opts, http.PathTemplate(pattern))

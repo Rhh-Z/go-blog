@@ -700,8 +700,8 @@ func (*ListArticleReply) Descriptor() ([]byte, []int) {
 
 type FeedArticleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Limit         int64                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
-	Offset        int64                  `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit         uint64                 `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset        uint64                 `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -736,14 +736,14 @@ func (*FeedArticleRequest) Descriptor() ([]byte, []int) {
 	return file_realworld_v1_article_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *FeedArticleRequest) GetLimit() int64 {
+func (x *FeedArticleRequest) GetLimit() uint64 {
 	if x != nil {
 		return x.Limit
 	}
 	return 0
 }
 
-func (x *FeedArticleRequest) GetOffset() int64 {
+func (x *FeedArticleRequest) GetOffset() uint64 {
 	if x != nil {
 		return x.Offset
 	}
@@ -1184,8 +1184,8 @@ const file_realworld_v1_article_proto_rawDesc = "" +
 	"\x06offset\x18\x05 \x01(\x04R\x06offset\"\x12\n" +
 	"\x10ListArticleReply\"B\n" +
 	"\x12FeedArticleRequest\x12\x14\n" +
-	"\x05limit\x18\x01 \x01(\x03R\x05limit\x12\x16\n" +
-	"\x06offset\x18\x02 \x01(\x03R\x06offset\"\x12\n" +
+	"\x05limit\x18\x01 \x01(\x04R\x05limit\x12\x16\n" +
+	"\x06offset\x18\x02 \x01(\x04R\x06offset\"\x12\n" +
 	"\x10FeedArticleReply\",\n" +
 	"\x16FavoriteArticleRequest\x12\x12\n" +
 	"\x04slug\x18\x01 \x01(\tR\x04slug\".\n" +

@@ -20,19 +20,15 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationRealWorldLogin = "/realworld.v1.RealWorld/Login"
-const OperationRealWorldRegister = "/realworld.v1.RealWorld/Register"
 
 type RealWorldHTTPServer interface {
 	// Login 登录
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
-	// Register 注册
-	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 }
 
 func RegisterRealWorldHTTPServer(s *http.Server, srv RealWorldHTTPServer) {
 	r := s.Route("/")
 	r.POST("/api/users/login", _RealWorld_Login0_HTTP_Handler(srv))
-	r.POST("/api/users", _RealWorld_Register0_HTTP_Handler(srv))
 }
 
 func _RealWorld_Login0_HTTP_Handler(srv RealWorldHTTPServer) func(ctx http.Context) error {
@@ -57,33 +53,9 @@ func _RealWorld_Login0_HTTP_Handler(srv RealWorldHTTPServer) func(ctx http.Conte
 	}
 }
 
-func _RealWorld_Register0_HTTP_Handler(srv RealWorldHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in RegisterRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationRealWorldRegister)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.Register(ctx, req.(*RegisterRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*RegisterResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type RealWorldHTTPClient interface {
 	// Login 登录
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginResponse, err error)
-	// Register 注册
-	Register(ctx context.Context, req *RegisterRequest, opts ...http.CallOption) (rsp *RegisterResponse, err error)
 }
 
 type RealWorldHTTPClientImpl struct {
@@ -100,20 +72,6 @@ func (c *RealWorldHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, o
 	pattern := "/api/users/login"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRealWorldLogin))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-// Register 注册
-func (c *RealWorldHTTPClientImpl) Register(ctx context.Context, in *RegisterRequest, opts ...http.CallOption) (*RegisterResponse, error) {
-	var out RegisterResponse
-	pattern := "/api/users"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationRealWorldRegister))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

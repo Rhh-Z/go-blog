@@ -11,7 +11,7 @@ import (
 )
 
 // ProviderSet is data providers.
-var ProviderSet = wire.NewSet(NewMongoDB, NewData, NewRealWorldRepo)
+var ProviderSet = wire.NewSet(NewMongoDB, NewData, NewRealWorldRepo, NewUserRepo)
 
 // Data .
 type Data struct {
@@ -19,22 +19,21 @@ type Data struct {
 }
 
 // 连接数据库
-func NewMongoDB() *qmgo.Database {
+func NewMongoDB() (client *qmgo.Client) {
 	ctx := context.Background()
 	client, err := qmgo.NewClient(ctx, &qmgo.Config{Uri: "mongodb://localhost:27017"})
-	databse := client.Database("kratos-realworld")
 	if err != nil {
 		fmt.Printf("数据库客户端连接失败!\n")
-		return databse
+		return
 	}
 
 	// 关闭连接
-	defer func() {
-		if err = client.Close(ctx); err != nil {
-			panic(err)
-		}
-	}()
-	return databse
+	// defer func() {
+	// 	if err = client.Close(ctx); err != nil {
+	// 		panic(err)
+	// 	}
+	// }()
+	return
 }
 
 // NewData .

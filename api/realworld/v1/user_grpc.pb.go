@@ -30,6 +30,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserClient interface {
+	// 注册
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserReply, error)
 	// 更新用户
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserReply, error)
@@ -101,6 +102,7 @@ func (c *userClient) ListUser(ctx context.Context, in *ListUserRequest, opts ...
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
 type UserServer interface {
+	// 注册
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserReply, error)
 	// 更新用户
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserReply, error)
