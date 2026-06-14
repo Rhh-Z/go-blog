@@ -11,7 +11,7 @@ service RealWorld {
   // 登录
   rpc Login(LoginRequest) returns (LoginResponse) {
     option (google.api.http) = {
-      post: "/api/users/login",
+      post: "/api/users/login/123",
       body: "*",
     };
   };

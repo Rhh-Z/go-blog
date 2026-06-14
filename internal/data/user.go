@@ -2,7 +2,6 @@ package data
 
 import (
 	"context"
-	"fmt"
 	"kratos-realworld/internal/biz"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -21,14 +20,13 @@ func NewUserRepo(data *Data, logger log.Logger) biz.UserRepo {
 	}
 }
 
-var DataBase = NewMongoDB().Database("kratos-realworld")
-
-func (r *UserRepo) SaveUser(ctx context.Context, user *biz.User) (*biz.User, error) {
-	collection := DataBase.Collection("user")
-	fmt.Println(collection)
+func (r *UserRepo) CreateUser(ctx context.Context, user *biz.User) (*biz.User, error) {
+	database := r.data.Client.Database("kratos-realworld")
+	collection := database.Collection("user")
+	// 没有集合  创建集合再插入数据
 	if collection == nil {
-		DataBase.CreateCollection(ctx, "user")
-		newCollection := DataBase.Collection("user")
+		database.CreateCollection(ctx, "user")
+		newCollection := database.Collection("user")
 		_, err := newCollection.InsertOne(ctx, biz.User{
 			Username: user.Username,
 			Password: user.Password,
@@ -46,8 +44,10 @@ func (r *UserRepo) SaveUser(ctx context.Context, user *biz.User) (*biz.User, err
 	return user, err
 }
 
-func (r *UserRepo) UpdateUser(ctx context.Context, id int64, user *biz.User) error {
-	collection := DataBase.Collection("user")
+func (r *UserRepo) UpdateUser(ctx context.Context, id int64, user *biz.User) (*biz.User, error) {
+	database := r.data.Client.Database("kratos-realworld")
+	collection := database.Collection("user")
+
 	filter := bson.M{"id": id}
 	update := bson.M{
 		"$set": bson.M{
@@ -58,10 +58,10 @@ func (r *UserRepo) UpdateUser(ctx context.Context, id int64, user *biz.User) err
 		},
 	}
 	err := collection.UpdateOne(ctx, filter, update)
-	return err
+	return user, err
 }
 
-func (r *UserRepo) GetUser(context.Context, int64) (*biz.User, error) {
+func (r *UserRepo) GetUseByEmail(ctx context.Context, email string) (*biz.User, error) {
 	// var user = biz.User
 	return nil, nil
 }

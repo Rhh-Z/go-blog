@@ -255,9 +255,9 @@ const file_realworld_v1_realworld_proto_rawDesc = "" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x10\n" +
 	"\x03bio\x18\x04 \x01(\tR\x03bio\x12\x14\n" +
-	"\x05image\x18\x05 \x01(\tR\x05image2j\n" +
-	"\tRealWorld\x12]\n" +
-	"\x05Login\x12\x1a.realworld.v1.LoginRequest\x1a\x1b.realworld.v1.LoginResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/users/loginB\x1fZ\x1drealworld/api/realworld/v1;v1b\x06proto3"
+	"\x05image\x18\x05 \x01(\tR\x05image2n\n" +
+	"\tRealWorld\x12a\n" +
+	"\x05Login\x12\x1a.realworld.v1.LoginRequest\x1a\x1b.realworld.v1.LoginResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/users/login/123B\x1fZ\x1drealworld/api/realworld/v1;v1b\x06proto3"
 
 var (
 	file_realworld_v1_realworld_proto_rawDescOnce sync.Once

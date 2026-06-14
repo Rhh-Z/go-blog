@@ -21,6 +21,7 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationUserCreateUser = "/api.realworld.v1.User/CreateUser"
 const OperationUserGetUser = "/api.realworld.v1.User/GetUser"
+const OperationUserLogin = "/api.realworld.v1.User/Login"
 const OperationUserUpdateUser = "/api.realworld.v1.User/UpdateUser"
 
 type UserHTTPServer interface {
@@ -28,6 +29,8 @@ type UserHTTPServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserReply, error)
 	// GetUser 获取用户
 	GetUser(context.Context, *GetUserRequest) (*GetUserReply, error)
+	// Login 登录
+	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	// UpdateUser 更新用户
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserReply, error)
 }
@@ -35,6 +38,7 @@ type UserHTTPServer interface {
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
 	r.POST("/api/users", _User_CreateUser0_HTTP_Handler(srv))
+	r.POST("/api/users/login", _User_Login1_HTTP_Handler(srv))
 	r.PUT("/api/user", _User_UpdateUser0_HTTP_Handler(srv))
 	r.GET("/api/user", _User_GetUser0_HTTP_Handler(srv))
 }
@@ -57,6 +61,28 @@ func _User_CreateUser0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) e
 			return err
 		}
 		reply := out.(*CreateUserReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_Login1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in LoginRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserLogin)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Login(ctx, req.(*LoginRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*LoginResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -107,6 +133,8 @@ type UserHTTPClient interface {
 	CreateUser(ctx context.Context, req *CreateUserRequest, opts ...http.CallOption) (rsp *CreateUserReply, err error)
 	// GetUser 获取用户
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserReply, err error)
+	// Login 登录
+	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginResponse, err error)
 	// UpdateUser 更新用户
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserReply, err error)
 }
@@ -141,6 +169,20 @@ func (c *UserHTTPClientImpl) GetUser(ctx context.Context, in *GetUserRequest, op
 	opts = append(opts, http.Operation(OperationUserGetUser))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// Login 登录
+func (c *UserHTTPClientImpl) Login(ctx context.Context, in *LoginRequest, opts ...http.CallOption) (*LoginResponse, error) {
+	var out LoginResponse
+	pattern := "/api/users/login"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserLogin))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
