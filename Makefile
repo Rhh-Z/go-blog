@@ -49,6 +49,11 @@ api:
 build:
 	mkdir -p bin/ && go build -ldflags "-X main.Version=$(VERSION)" -o ./bin/ ./...
 
+.PHONY: wire
+# wire
+wire:
+	cd cmd/kratos-realworld/ && wire
+
 .PHONY: generate
 # generate
 generate:
