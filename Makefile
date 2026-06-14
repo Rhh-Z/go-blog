@@ -54,6 +54,11 @@ build:
 wire:
 	cd cmd/kratos-realworld/ && wire
 
+.PHONY: dev
+# dev
+dev:
+	kratos run
+
 .PHONY: generate
 # generate
 generate:
