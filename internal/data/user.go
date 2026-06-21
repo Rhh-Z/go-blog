@@ -44,6 +44,14 @@ func (r *UserRepo) CreateUser(ctx context.Context, user *biz.User) (*biz.User, e
 	return user, err
 }
 
+func (r *UserRepo) Register(ctx context.Context, email string, username string, password string) (*biz.UserLogin, error) {
+	return nil, nil
+}
+
+func (r *UserRepo) Login(ctx context.Context, email string, passwrod string) (*biz.UserLogin, error) {
+	return nil, nil
+}
+
 func (r *UserRepo) UpdateUser(ctx context.Context, id int64, user *biz.User) (*biz.User, error) {
 	database := r.data.Client.Database("kratos-realworld")
 	collection := database.Collection("user")
@@ -61,12 +69,8 @@ func (r *UserRepo) UpdateUser(ctx context.Context, id int64, user *biz.User) (*b
 	return user, err
 }
 
-func (r *UserRepo) GetUseByEmail(ctx context.Context, email string) (*biz.User, error) {
+func (r *UserRepo) GetUserByEmail(ctx context.Context, email string) (*biz.User, error) {
 	// var user = biz.User
-	return nil, nil
-}
-
-func (r *UserRepo) ListByHello(context.Context, string) ([]*biz.User, error) {
 	return nil, nil
 }
 
