@@ -87,19 +87,20 @@ func (uc *UserUsecase) Register(ctx context.Context, email string, username stri
 		return nil, err
 	}
 
-	return &UserLogin{  
+	return &UserLogin{
 		Username: username,
 		Token:    "xXX",
 	}, nil
 }
 
 func (uc *UserUsecase) Login(ctx context.Context, email string, password string) (*User, error) {
- 	u,err := uc.repo.GetUserByEmail(ctx, email)
+	user, err := uc.repo.GetUserByEmail(ctx, email)
 	if err != nil {
-		return  nil, err
+		return nil, err
 	}
 
-	if !verifyPassword()
+	// if !verifyPassword() {}
+	return user, err
 }
 
 func (uc *UserUsecase) GetUseByEmail(ctx context.Context, email string) (*User, error) {

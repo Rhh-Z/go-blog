@@ -38,7 +38,7 @@ type UserHTTPServer interface {
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
 	r.POST("/api/users", _User_CreateUser0_HTTP_Handler(srv))
-	r.POST("/api/users/login", _User_Login1_HTTP_Handler(srv))
+	r.POST("/api/users/login", _User_Login0_HTTP_Handler(srv))
 	r.PUT("/api/user", _User_UpdateUser0_HTTP_Handler(srv))
 	r.GET("/api/user", _User_GetUser0_HTTP_Handler(srv))
 }
@@ -65,7 +65,7 @@ func _User_CreateUser0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) e
 	}
 }
 
-func _User_Login1_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Login0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in LoginRequest
 		if err := ctx.Bind(&in); err != nil {

@@ -29,14 +29,11 @@ func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 	if err != nil {
 		return nil, nil, err
 	}
-	realWorldRepo := data.NewRealWorldRepo(dataData, logger)
-	realWorldUsecase := biz.NewRealWorldUsecase(realWorldRepo, logger)
-	realWorldService := service.NewRealWorldService(realWorldUsecase)
 	userRepo := data.NewUserRepo(dataData, logger)
 	userUsecase := biz.NewUserUsecase(userRepo, logger)
 	userService := service.NewUserService(userUsecase)
-	grpcServer := server.NewGRPCServer(confServer, realWorldService, userService, logger)
-	httpServer := server.NewHTTPServer(confServer, realWorldService, userService, logger)
+	grpcServer := server.NewGRPCServer(confServer, userService, logger)
+	httpServer := server.NewHTTPServer(confServer, userService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
 		cleanup()

@@ -17,11 +17,7 @@ func NewUserService(uc *biz.UserUsecase) *UserService {
 }
 
 func (userService *UserService) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserReply, error) {
-	userService.uc.Register(ctx, &biz.User{
-		Email:    req.User.Email,
-		Username: req.User.Username,
-		Password: req.User.Password,
-	})
+	userService.uc.Register(ctx, req.User.Email, req.User.Username, req.User.Password)
 
 	return &pb.CreateUserReply{
 		Name: req.User.Username,
