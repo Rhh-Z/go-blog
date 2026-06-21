@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package api.realworld.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "kratos-realworld/api/realworld/v1;v1";
+
+// user
+service User {
+  // 注册
+  rpc CreateUser (CreateUserRequest) returns (CreateUserReply){
+    option (google.api.http) = {
+      post: "/api/users",
+      body: "*",
+    };
+  };
+    // 登录
+  rpc Login(LoginRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/api/users/login",
+      body: "*",
+    };
+  };
+	// 更新用户
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply){
+    option (google.api.http) = {
+      put : "/api/user",
+      body: "*"
+    };
+  };
+	// 获取用户
+  rpc GetUser (GetUserRequest) returns (GetUserReply) {
+    option (google.api.http) = {
+      get: "/api/user",
+    };
+  };
+}
+
+message LoginRequest {
+  message User {
+    string email    = 1;
+    string password = 2;
+  }
+  User user = 1;
+}
+
+message LoginResponse {
+  message User {
+    string username = 1;
+    string email    = 2;
+    string password = 3;
+    string bio      = 4;
+    string image    = 5;
+  }
+  User user = 1;
+}
+
+message CreateUserRequest {
+  message User {
+    string username = 1;
+    string email    = 2;
+    string password = 3;
+  }
+  User user = 1;
+}
+
+message CreateUserReply {
+  string username = 1;
+  string token = 2;
+}
+
+message UpdateUserRequest {
+  message User {
+    string username = 1;
+    string bio      = 2;
+    string image    = 3;
+  }
+
+  User user = 1;
+}
+
+message UpdateUserReply {}
+
+message DeleteUserRequest {}
+
+message DeleteUserReply {}
+
+message GetUserRequest {}
+
+message GetUserReply {
+  message User {
+    string email    = 1;
+    string token    = 2;
+    string username = 3;
+    string bio      = 4;
+    string image    = 5;
+  }
+
+  User user = 1;
+}
+
+message ListUserRequest {}
+
+message ListUserReply {}

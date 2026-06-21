@@ -1,20 +1,38 @@
 package server
 
 import (
+	"context"
 	v1 "kratos-realworld/api/realworld/v1"
 	"kratos-realworld/internal/conf"
+	auth "kratos-realworld/internal/pkg/middleware"
 	"kratos-realworld/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
+	"github.com/go-kratos/kratos/v2/middleware/selector"
 	"github.com/go-kratos/kratos/v2/transport/http"
 )
 
+func NewSkipRoutesMatcher() selector.MatchFunc {
+	skipRoutes := make(map[string]struct{})
+	skipRoutes["/api.realworld.v1.User/Login"] = struct{}{}
+	skipRoutes["/api.realworld.v1.User/CreateUser"] = struct{}{}
+
+	return func(ctx context.Context, operation string) bool {
+		if _, ok := skipRoutes[operation]; ok {
+			return false
+		}
+		return true
+	}
+}
+
 // NewHTTPServer new an HTTP server.
-func NewHTTPServer(c *conf.Server, user *service.UserService, logger log.Logger) *http.Server {
+func NewHTTPServer(c *conf.Server, jwtc *conf.JWT, user *service.UserService, logger log.Logger) *http.Server {
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
+			// token校验
+			selector.Server(auth.JWTAuth(jwtc.Token)).Match(NewSkipRoutesMatcher()).Build(),
 		),
 	}
 	if c.Http.Network != "" {

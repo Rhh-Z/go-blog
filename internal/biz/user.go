@@ -3,6 +3,8 @@ package biz
 import (
 	"context"
 	v1 "kratos-realworld/api/realworld/v1"
+	"kratos-realworld/internal/conf"
+	auth "kratos-realworld/internal/pkg/middleware"
 
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
@@ -54,6 +56,7 @@ type UserRepo interface {
 // UserUsecase is a User usecase.  加日志
 type UserUsecase struct {
 	repo UserRepo
+	jwtc *conf.JWT
 	log  *log.Helper
 }
 
@@ -72,24 +75,28 @@ func verifyPassword(hashPwd string, pwd string) bool {
 	return true
 }
 
-func NewUserUsecase(repo UserRepo, logger log.Logger) *UserUsecase {
-	return &UserUsecase{repo: repo, log: log.NewHelper(logger)}
+func NewUserUsecase(repo UserRepo, jwtc *conf.JWT, logger log.Logger) *UserUsecase {
+	return &UserUsecase{repo: repo, jwtc: jwtc, log: log.NewHelper(logger)}
+}
+
+func (uc *UserUsecase) generateToken(username string) string {
+	return auth.GenerateToken(uc.jwtc.Token, username)
 }
 
 func (uc *UserUsecase) Register(ctx context.Context, email string, username string, password string) (*UserLogin, error) {
-	u := &User{
+	newUser := &User{
 		Email:    email,
 		Username: username,
-		Password: password,
+		Password: hashPassword(password),
 	}
 
-	if _, err := uc.repo.CreateUser(ctx, u); err != nil {
+	if _, err := uc.repo.CreateUser(ctx, newUser); err != nil {
 		return nil, err
 	}
 
 	return &UserLogin{
 		Username: username,
-		Token:    "xXX",
+		Token:    uc.generateToken(username),
 	}, nil
 }
 

@@ -156,7 +156,8 @@ func (x *CreateUserRequest) GetUser() *CreateUserRequest_User {
 
 type CreateUserReply struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -191,9 +192,16 @@ func (*CreateUserReply) Descriptor() ([]byte, []int) {
 	return file_realworld_v1_user_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CreateUserReply) GetName() string {
+func (x *CreateUserReply) GetUsername() string {
 	if x != nil {
-		return x.Name
+		return x.Username
+	}
+	return ""
+}
+
+func (x *CreateUserReply) GetToken() string {
+	if x != nil {
+		return x.Token
 	}
 	return ""
 }
@@ -849,9 +857,10 @@ const file_realworld_v1_user_proto_rawDesc = "" +
 	"\x04User\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\"%\n" +
-	"\x0fCreateUserReply\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\x9d\x01\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\"C\n" +
+	"\x0fCreateUserReply\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
+	"\x05token\x18\x02 \x01(\tR\x05token\"\x9d\x01\n" +
 	"\x11UpdateUserRequest\x12<\n" +
 	"\x04user\x18\x01 \x01(\v2(.api.realworld.v1.UpdateUserRequest.UserR\x04user\x1aJ\n" +
 	"\x04User\x12\x1a\n" +

@@ -17,10 +17,14 @@ func NewUserService(uc *biz.UserUsecase) *UserService {
 }
 
 func (userService *UserService) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserReply, error) {
-	userService.uc.Register(ctx, req.User.Email, req.User.Username, req.User.Password)
+	user, err := userService.uc.Register(ctx, req.User.Email, req.User.Username, req.User.Password)
+	if err != nil {
+		return nil, err
+	}
 
 	return &pb.CreateUserReply{
-		Name: req.User.Username,
+		Username: user.Username,
+		Token:    user.Token,
 	}, nil
 }
 func (userService *UserService) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.UpdateUserReply, error) {
