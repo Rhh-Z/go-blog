@@ -11,8 +11,10 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/middleware/selector"
 	"github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/gorilla/handlers"
 )
 
+// 跳过检验的路由
 func NewSkipRoutesMatcher() selector.MatchFunc {
 	skipRoutes := make(map[string]struct{})
 	skipRoutes["/api.realworld.v1.User/Login"] = struct{}{}
@@ -29,10 +31,17 @@ func NewSkipRoutesMatcher() selector.MatchFunc {
 // NewHTTPServer new an HTTP server.
 func NewHTTPServer(c *conf.Server, jwtc *conf.JWT, user *service.UserService, logger log.Logger) *http.Server {
 	var opts = []http.ServerOption{
+		http.ErrorEncoder(errorEncoder),
 		http.Middleware(
 			recovery.Recovery(),
 			// token校验
 			selector.Server(auth.JWTAuth(jwtc.Token)).Match(NewSkipRoutesMatcher()).Build(),
+		),
+		http.Filter(
+			handlers.CORS(handlers.AllowedHeaders([]string{" ", "Content-Type", "Authorization"}),
+				handlers.AllowedMethods([]string{"get", "post", "HEAD", "PUT", "OPTION"}),
+				handlers.AllowedOrigins([]string{"*"}),
+			),
 		),
 	}
 	if c.Http.Network != "" {

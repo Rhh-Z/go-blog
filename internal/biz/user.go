@@ -46,7 +46,7 @@ type UserRegister struct {
 // UserRepo is a user repo.
 type UserRepo interface {
 	CreateUser(context.Context, *User) (*User, error)
-	Register(ctx context.Context, email string, username string, password string) (*UserLogin, error)
+	// Register(ctx context.Context, email string, username string, password string) (*UserLogin, error)
 	Login(ctx context.Context, email string, passwrod string) (*UserLogin, error)
 	UpdateUser(context.Context, int64, *User) (*User, error)
 	GetUserByEmail(ctx context.Context, email string) (*User, error)
